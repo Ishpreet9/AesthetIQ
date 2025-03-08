@@ -1,10 +1,11 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import { Outlet, Link, useNavigate } from 'react-router-dom'
 import { assets } from '../assets/assets'
+import { AppContext } from '../context/AppContext';
 
 const Navbar = () => {
 
-    const [user,setUser] = useState(true);
+    const {user} = useContext(AppContext);
     const navigate = useNavigate();
 
     return (
@@ -13,7 +14,6 @@ const Navbar = () => {
             <Link to='/'>
                 <img src={assets.logo} alt="" className='w-16 filter invert' />
             </Link>
-            <Outlet />
             <div>
                 {user ? 
                   <div className='flex gap-4 mt-3 items-center'>
@@ -23,9 +23,11 @@ const Navbar = () => {
                     </button>
                     <div className='border-3 border-black rounded-full group'>
                       <img src={assets.profile} alt="" className='w-10 filter invert cursor-pointer' />
-                      <div className='absolute hidden group-hover:block top-14 right-14 bg-neutral-300 border-3 border-black font-semibold p-1 cursor-pointer'>
-                        <ul>
-                          <li>LogOut</li>
+                      <div className='absolute hidden group-hover:block top-17 right-30 bg-neutral-300 border-3 border-black font-semibold cursor-pointer rounded-lg overflow-hidden'>
+                        <ul className='list-none'>
+                          <li className='hover:bg-neutral-400 py-1 border-b-3 border-black px-6'>LogOut</li>
+                          <li className='hover:bg-neutral-400 py-1 border-b-3 border-black px-6'>LogIn</li>
+                          <li className='hover:bg-neutral-400 py-1 px-6'>LogIn</li>
                         </ul>
                       </div>
                     </div>
@@ -39,6 +41,7 @@ const Navbar = () => {
             </div>
         </div>
         <hr className='h-[0.5]px w-[90%] border-1 mx-auto border-gray-200 ' />
+        <Outlet />
       </div>
     )
 }
