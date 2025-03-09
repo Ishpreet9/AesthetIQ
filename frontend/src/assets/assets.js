@@ -6,6 +6,10 @@ import sample_image_1 from './sample_image_1.jpg';
 import sample_image_2 from './sample_image_2.jpg';
 import sample_image_3 from './sample_image_3.jpg';
 import sample_image_4 from './sample_image_4.jpg';
+import idea from './idea.png';
+import wand from './wand.png';
+import download from './download.png';
+import share from './share.png';
 
 
 export const assets = {
@@ -17,4 +21,8 @@ export const assets = {
     sample_image_2,
     sample_image_3,
     sample_image_4,
+    idea,
+    wand,
+    download,
+    share
 }

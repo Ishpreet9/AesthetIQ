@@ -23,7 +23,7 @@ const Navbar = () => {
                     </button>
                     <div className='border-3 border-black rounded-full group'>
                       <img src={assets.profile} alt="" className='w-10 filter invert cursor-pointer' />
-                      <div className='absolute hidden group-hover:block top-17 right-30 bg-neutral-300 border-3 border-black font-semibold cursor-pointer rounded-lg overflow-hidden'>
+                      <div className='absolute opacity-0 invisible group-hover:opacity-100 group-hover:visible top-17 right-30 bg-neutral-300 border-3 border-black font-semibold cursor-pointer rounded-md overflow-hidden transition-all duration-500'>
                         <ul className='list-none'>
                           <li className='hover:bg-neutral-400 py-1 border-b-3 border-black px-6'>LogOut</li>
                           <li className='hover:bg-neutral-400 py-1 border-b-3 border-black px-6'>LogIn</li>

@@ -3,6 +3,7 @@ import Home from './pages/Home';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import BuyCredits from './pages/BuyCredits';
+import Generate from './pages/Generate';
 
 
 const App = () => {
@@ -19,6 +20,10 @@ const App = () => {
         {
           path: "/buy",
           element: <BuyCredits />
+        },
+        {
+          path: "/generate",
+          element: <Generate />
         }
       ]
     }
