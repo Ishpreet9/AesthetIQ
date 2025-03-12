@@ -10,7 +10,9 @@ import idea from './idea.png';
 import wand from './wand.png';
 import download from './download.png';
 import share from './share.png';
-
+import wrench from './wrench.png';
+import rocket from './rocket.png';
+import crown from './crown.png';
 
 export const assets = {
     logo,
@@ -24,5 +26,8 @@ export const assets = {
     idea,
     wand,
     download,
-    share
+    share,
+    wrench,
+    rocket,
+    crown
 }

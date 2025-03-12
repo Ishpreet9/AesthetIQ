@@ -4,6 +4,7 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import BuyCredits from './pages/BuyCredits';
 import Generate from './pages/Generate';
+import Login from './pages/Login';
 
 
 const App = () => {
@@ -24,6 +25,10 @@ const App = () => {
         {
           path: "/generate",
           element: <Generate />
+        },
+        {
+          path: "/login",
+          element: <Login />
         }
       ]
     }

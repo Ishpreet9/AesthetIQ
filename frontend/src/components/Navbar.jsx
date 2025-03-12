@@ -1,5 +1,5 @@
 import React, { useContext, useState } from 'react'
-import { Outlet, Link, useNavigate } from 'react-router-dom'
+import { Outlet, Link, NavLink, useNavigate } from 'react-router-dom'
 import { assets } from '../assets/assets'
 import { AppContext } from '../context/AppContext';
 
@@ -17,12 +17,16 @@ const Navbar = () => {
             <div>
                 {user ? 
                   <div className='flex gap-4 mt-3 items-center'>
+                    <NavLink to={'/buy'}>
                     <button className='flex gap-2 items-center bg-neutral-200 p-2 rounded-full border-3 border-black font-semibold cursor-pointer'>
                       <p>Credits left: 10</p>
                       <img src={assets.star} alt="" className='w-5' />
                     </button>
+                    </NavLink>
                     <div className='border-3 border-black rounded-full group'>
+                      <NavLink to={'/login'}>
                       <img src={assets.profile} alt="" className='w-10 filter invert cursor-pointer' />
+                      </NavLink>
                       <div className='absolute opacity-0 invisible group-hover:opacity-100 group-hover:visible top-17 right-30 bg-neutral-300 border-3 border-black font-semibold cursor-pointer rounded-md overflow-hidden transition-all duration-500'>
                         <ul className='list-none'>
                           <li className='hover:bg-neutral-400 py-1 border-b-3 border-black px-6'>LogOut</li>
