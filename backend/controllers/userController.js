@@ -27,3 +27,41 @@ const registerUser = async (req,res) => {
         res.status(500).json({message:'Server error',error:error.message})
     }
 }
+
+const loginUser = async (req,res) => {
+    try {
+        const {email,password} = req.body;
+    
+        //find email and include password explicitly 
+        const user = await userModel.findOne({email}).select('+password');
+        if(!user)
+        {
+            return res.status(400).json({message:'Invalid email or password'});
+        }
+    
+        //comparing passwords
+        const isMatch = await bcrypt.compare(password, user.password);
+        if(!isMatch)
+        {
+            return res.status(400).json({message:'Invalid email or password'})
+        }
+        
+        //if matched then generate token 
+        const token = jwt.sign(
+            {
+                id: user._id
+            },
+            process.env.JWT_SECRET,
+            {
+                expiresIn: '7d'
+            } 
+        )
+    
+        res.status(200).json({message:'Login Successful', token});
+        
+    } catch (error) {
+        res.status(400).json({message:'Server error',error:error.message});
+    }
+}
+
+export {registerUser,loginUser};
