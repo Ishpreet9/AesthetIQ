@@ -54,7 +54,7 @@ const loginUser = async (req,res) => {
             process.env.JWT_SECRET,
             {
                 expiresIn: '7d'
-            } 
+            }
         )
     
         res.status(200).json({message:'Login Successful', token});
@@ -64,4 +64,24 @@ const loginUser = async (req,res) => {
     }
 }
 
-export {registerUser,loginUser};
+const userCredits = async (req,res) => {
+    try {
+        console.log(req.user);
+        console.log(req.body);
+        const userId = req.userId;
+        if(!userId)
+        {
+            return res.status(400).json({success:false,message:'Unable to retrieve user information'})
+        }
+        const user = await userModel.findById(userId);
+        if(!user)
+        {
+            return res.status(404).json({success:false,message:'User not found'});
+        }
+        return res.json({success:true,credits: user.creditBalance, user:{name: user.name}})
+    } catch (error) {
+        return res.status(500).json({success:false,message:error.message});
+    }
+}
+
+export {registerUser,loginUser,userCredits};

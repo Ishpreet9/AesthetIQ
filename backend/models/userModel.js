@@ -10,7 +10,7 @@ const userSchema = new mongoose.Schema({
     minlength: [6, 'Password must be at least 6 characters'],
     select: false
   },
-  credit: { type: Number, default: 5 },
+  creditBalance: { type: Number, default: 5 },
   createdAt:{
     type: Date,
     default: Date.now
