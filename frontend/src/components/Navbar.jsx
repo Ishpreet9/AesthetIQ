@@ -38,8 +38,12 @@ const Navbar = () => {
                   </div>
                     :
                   <div className='flex items-center gap-4 sm:gap-8 mt-2 text-lg font-semibold'>
-                    <button className='bg-gray-200 text-black rounded-full px-4 py-2 border-3 border-black w-30'>Pricing</button>  
+                    <NavLink to={'/buy'}>
+                    <button className='bg-gray-200 text-black rounded-full px-4 py-2 border-3 border-black w-30 cursor-pointer'>Pricing</button>  
+                    </NavLink>
+                    <NavLink to={'/login'}>
                     <button className='bg-gray-200 text-black rounded-full px-4 py-2 cursor-pointer border-3 border-black w-30'>Login</button>
+                    </NavLink>
                   </div>
                 }
             </div>
