@@ -4,11 +4,13 @@ import cors from 'cors';
 import connectDB from './config/mongodb.js';
 import userRoutes from './routes/userRoutes.js'
 import imageRouter from './routes/imageRoutes.js';
+import cookieParser from 'cookie-parser';
 
 connectDB();
 const PORT = process.env.PORT || 4000
 const app = express();
 
+app.use(cookieParser());
 app.use(express.json());
 app.use(cors());
 app.use('/api/user',userRoutes);

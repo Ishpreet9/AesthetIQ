@@ -22,9 +22,9 @@ const registerUser = async (req,res) => {
         const user = new userModel(userData);
         await user.save();
 
-        res.status(201).json({message:'User registered successfully'});
+        res.status(201).json({success:true, message:'User registered successfully'});
     } catch (error) {
-        res.status(500).json({message:'Server error',error:error.message})
+        res.status(500).json({success:false, message:'Server error',error:error.message})
     }
 }
 
@@ -56,8 +56,14 @@ const loginUser = async (req,res) => {
                 expiresIn: '7d'
             }
         )
+
+        res.cookie('token',token,{
+            httpOnly: true,
+            secure: process.env.NODE_ENV==="production",
+            sameSite: "Strict"
+        });
     
-        res.status(200).json({message:'Login Successful', token});
+        res.status(200).json({message:'Login Successful', username: user.name});
         
     } catch (error) {
         res.status(400).json({message:'Server error',error:error.message});
