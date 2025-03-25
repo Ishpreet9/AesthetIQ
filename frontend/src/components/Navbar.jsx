@@ -5,21 +5,24 @@ import { AppContext } from '../context/AppContext';
 
 const Navbar = () => {
 
-    const {user} = useContext(AppContext);
+    const {user, credits} = useContext(AppContext);
     const navigate = useNavigate();
 
     return (
         <div className='flex flex-col justify-center '>
         <div className='py-2 flex justify-between px-28'>
+          <div className='flex gap-6 items-center text-xl font-semibold italic'>
             <Link to='/'>
                 <img src={assets.logo} alt="" className='w-16 filter invert' />
             </Link>
+            <p className='text-neutral-200'>{`Hello ${user}`}</p>
+          </div>
             <div>
                 {user ? 
                   <div className='flex gap-4 mt-3 items-center'>
                     <NavLink to={'/buy'}>
                     <button className='flex gap-2 items-center bg-neutral-200 p-2 rounded-full border-3 border-black font-semibold cursor-pointer'>
-                      <p>Credits left: 10</p>
+                      <p>{`Credits left: ${credits}`}</p>
                       <img src={assets.star} alt="" className='w-5' />
                     </button>
                     </NavLink>

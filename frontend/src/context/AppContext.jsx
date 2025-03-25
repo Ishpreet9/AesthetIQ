@@ -18,7 +18,9 @@ const AppContextProvider = (props) => {
         if(response.data.success)
         {
             setCredits(response.data.credits);
-            console.log(credits);
+            console.log(response.data.credits);
+            setUser(response.data.user.name);
+            console.log(response.data.user.name);
             console.log(response);
         }
     }
