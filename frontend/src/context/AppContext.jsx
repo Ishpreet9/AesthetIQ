@@ -8,9 +8,10 @@ const AppContextProvider = (props) => {
     const backendUrl = import.meta.env.VITE_BACKEND_URL;
     const [token,setToken] = useState();
     const [credits,setCredits] = useState(false);
+    const [image,setImage] = useState('');
 
     const value = {
-        user, setUser, backendUrl, token, setToken, credits, setCredits
+        user, setUser, backendUrl, token, setToken, credits, setCredits, image, setImage
     }
 
     const getCredits = async () => {
