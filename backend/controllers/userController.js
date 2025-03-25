@@ -36,14 +36,14 @@ const loginUser = async (req,res) => {
         const user = await userModel.findOne({email}).select('+password');
         if(!user)
         {
-            return res.status(400).json({message:'Invalid email or password'});
+            return res.status(400).json({success:false, message:'Invalid email or password'});
         }
     
         //comparing passwords
         const isMatch = await bcrypt.compare(password, user.password);
         if(!isMatch)
         {
-            return res.status(400).json({message:'Invalid email or password'})
+            return res.status(400).json({success:false, message:'Invalid email or password'})
         }
         
         //if matched then generate token 
@@ -59,14 +59,14 @@ const loginUser = async (req,res) => {
 
         res.cookie('token',token,{
             httpOnly: true,
-            secure: process.env.NODE_ENV==="production",
-            sameSite: "Strict"
+            secure: false,
+            sameSite: "lax"
         });
     
-        res.status(200).json({message:'Login Successful', username: user.name});
+        res.status(200).json({success:true, message:'Login Successful', username: user.name});
         
     } catch (error) {
-        res.status(400).json({message:'Server error',error:error.message});
+        res.status(400).json({success:false, message:'Server error',error:error.message});
     }
 }
 
