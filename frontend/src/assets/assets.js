@@ -13,6 +13,10 @@ import share from './share.png';
 import wrench from './wrench.png';
 import rocket from './rocket.png';
 import crown from './crown.png';
+import ghibili_image from './ghibili_image.jpg';
+import anime_image from './anime_image.jpg';
+import logo_image from './logo_image.jpg';
+import realistic_image from './realistic_image.jpg';
 
 export const assets = {
     logo,
@@ -29,5 +33,9 @@ export const assets = {
     share,
     wrench,
     rocket,
-    crown
+    crown,
+    ghibili_image,
+    anime_image,
+    logo_image,
+    realistic_image
 }
