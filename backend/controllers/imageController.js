@@ -4,8 +4,27 @@ import axios from 'axios';
 const generateImage = async (req,res) => {
     try {
           const userId = req.userId;
-          const {prompt} = req.body;
+          const {prompt, style} = req.body;
           const user = await userModel.findById(userId);
+          let stylePrompt = '';
+          if(style==='anime')
+          {
+            stylePrompt = 'An anime style image. ';
+          }
+          else if(style==='ghibli')
+          {
+            stylePrompt = 'A studio ghibli style image. ';
+          }
+          else if(style==='realistic')
+          {
+            stylePrompt = 'A very realistic image. ';
+          }
+          else if(style==='logo')
+          {
+            stylePrompt = 'A minimalist style logo. ';
+          }
+
+          const finalPrompt = stylePrompt+prompt;
 
           if(!user || !prompt)
           {
@@ -17,10 +36,12 @@ const generateImage = async (req,res) => {
             return res.status(403).json({success:false, message: 'Not enough credits', creditBalance: user.creditBalance});
           }
 
+          console.log(finalPrompt);
+
           const response = await axios.postForm(
             'https://api.stability.ai/v2beta/stable-image/generate/ultra',
             {
-                prompt: prompt,
+                prompt: finalPrompt,
                 output_format: 'webp'
             },
             {
