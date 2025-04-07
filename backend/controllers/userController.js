@@ -70,6 +70,21 @@ const loginUser = async (req,res) => {
     }
 }
 
+const logoutUser = async (req,res) => {
+    try {
+        res.cookie('token','',{
+            expires: new Date(0),
+            httpOnly: true, 
+            secure: false,
+            sameSite: "lax"
+        });
+    
+        res.status(200).json({success: true, message:'Logged out successfully'});
+    } catch (error) {
+        res.status(400).json({success:false, message:'Logout failed server error'});
+    }
+}
+
 const userCredits = async (req,res) => {
     try {
         console.log(req.user);
@@ -90,4 +105,4 @@ const userCredits = async (req,res) => {
     }
 }
 
-export {registerUser,loginUser,userCredits};
+export {registerUser,loginUser,logoutUser,userCredits};

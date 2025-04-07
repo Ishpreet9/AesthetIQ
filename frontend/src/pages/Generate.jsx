@@ -33,6 +33,22 @@ const Generate = () => {
     }
   }
 
+  const downloadImage = () => {
+    if(image !== '')
+    {
+      const link = document.createElement('a');
+      link.href = image;
+      link.download = 'generatedImage.webp'
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+    }
+    else
+    {
+      console.log("Image not available to download");
+    }
+  }
+
   return (
     <div className='flex flex-col gap-6 text-center justify-center items-center mt-12'>
     {/* image section */}
@@ -50,7 +66,7 @@ const Generate = () => {
       {/* download and share button */}
       <div className='flex gap-10'>
         <div className='bg-neutral-700 w-13 h-13 rounded-md cursor-pointer flex items-center justify-center'>
-          <img src={assets.download} alt="" className='w-10 filter invert opacity-60'/>
+          <img src={assets.download} onClick={downloadImage} alt="" className='w-10 filter invert opacity-60'/>
         </div>
         <div className='bg-neutral-700 w-13 h-13 rounded-md cursor-pointer flex items-center justify-center'>
           <img src={assets.share} alt="" className='w-8 filter invert opacity-60' />
