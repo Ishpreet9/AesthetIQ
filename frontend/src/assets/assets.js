@@ -17,6 +17,7 @@ import ghibli_image from './ghibli_image.jpg';
 import anime_image from './anime_image.jpg';
 import logo_image from './logo_image.jpg';
 import realistic_image from './realistic_image.jpg';
+import menu from './menu.png';
 
 export const assets = {
     logo,
@@ -37,5 +38,6 @@ export const assets = {
     ghibli_image,
     anime_image,
     logo_image,
-    realistic_image
+    realistic_image,
+    menu
 }
