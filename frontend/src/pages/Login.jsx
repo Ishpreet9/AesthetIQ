@@ -44,7 +44,7 @@ const Login = () => {
 
   return (
     <div className='flex flex-col justify-center items-center'>
-      <div className='bg-neutral-700 mt-20 px-12 py-8 flex flex-col justify-center items-center rounded-xl'>
+      <div className='bg-neutral-700 mt-20 px-12 py-8 flex flex-col justify-center items-center md:rounded-xl'>
         <h1 className='text-neutral-200 text-4xl font-bold'>{signedUp ? 'LOGIN' : 'SIGN UP'}</h1>
         <form onSubmit={onSubmitHandler} action="" className='flex flex-col gap-5 mt-5 justify-center items-center'>
           {signedUp || <input onChange={(e) => setName(e.target.value)} value={name} type="text" className='bg-neutral-800 text-neutral-300 pl-4 pr-20 py-4 rounded-lg text-lg' placeholder='Enter username' />}

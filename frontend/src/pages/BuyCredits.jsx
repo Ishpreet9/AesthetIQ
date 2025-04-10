@@ -8,7 +8,7 @@ const BuyCredits = () => {
       <div className='bg-neutral-600 text-neutral-200 text-lg inline-flex px-8 py-3 mt-10 rounded-full cursor-pointer'>
         <p>"PURCHASE CREDITS"</p>
       </div>
-      <div className='mt-16 flex flex-cols gap-10'>
+      <div className='mt-16 flex md:flex-row flex-col gap-10 mb:mb-0 mb-10'>
         <div className='bg-neutral-600 flex flex-col gap-4 p-6 rounded-xl text-center w-80'>
           <img src={assets.wrench} alt="" className='w-12 filter invert mx-auto' />
           <h1 className='text-4xl font-bold text-neutral-200'>BASIC</h1>
