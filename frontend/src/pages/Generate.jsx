@@ -105,16 +105,16 @@ const Generate = () => {
             </div>
           </div>
         </div>
-        <div className='flex flex-col justify-around md:h-[160px] h-[60px]'>
-          <button type='button' onClick={()=>setAspectRatio('16:9')} className={`flex items-center justify-center gap-4 bg-neutral-900 text-neutral-200 w-30 h-10 cursor-pointer rounded-lg border-3 ${aspectRatio === '16:9' ? 'border-red-400/90' : 'border-black'}`}>
+        <div className='flex md:flex-col flex-row md:justify-around justify-between md:w-0 w-full md:h-[160px] h-[60px]'>
+          <button type='button' onClick={()=>setAspectRatio('16:9')} className={`flex items-center justify-center gap-4 bg-neutral-900 text-neutral-200 md:w-30 w-26 md:h-10 h-12 cursor-pointer rounded-lg border-3 ${aspectRatio === '16:9' ? 'border-red-400/90' : 'border-black'}`}>
             <div className='w-7 h-3.5 border-2 border-white'></div>
             <span>16:9</span>
           </button>
-          <button type='button' onClick={()=>setAspectRatio('1:1')} className={`flex items-center justify-center gap-4 bg-neutral-900 text-neutral-200 w-30 h-10 cursor-pointer rounded-lg border-3 ${aspectRatio === '1:1' ? 'border-red-400/90' : 'border-black'}`}>
+          <button type='button' onClick={()=>setAspectRatio('1:1')} className={`flex items-center justify-center gap-4 bg-neutral-900 text-neutral-200 md:w-30 w-26 md:h-10 h-12 cursor-pointer rounded-lg border-3 ${aspectRatio === '1:1' ? 'border-red-400/90' : 'border-black'}`}>
             <div className='w-5 h-5 border-2 border-white'></div>
             <span>1:1</span>
           </button>
-          <button type='button' onClick={()=>setAspectRatio('9:16')} className={`flex items-center justify-center gap-4 bg-neutral-900 text-neutral-200 w-30 h-10 cursor-pointer rounded-lg border-3 ${aspectRatio === '9:16' ? 'border-red-400/90' : 'border-black'}`}>
+          <button type='button' onClick={()=>setAspectRatio('9:16')} className={`flex items-center justify-center gap-4 bg-neutral-900 text-neutral-200 md:w-30 w-26 md:h-10 h-12 cursor-pointer rounded-lg border-3 ${aspectRatio === '9:16' ? 'border-red-400/90' : 'border-black'}`}>
             <div className='w-3.5 h-6 border-2 border-white'></div>
             <span>9:16</span>
           </button>
