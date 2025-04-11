@@ -11,6 +11,7 @@ const Generate = () => {
   const [style, setStyle] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [showStyles, setShowStyles] = useState(false);
+  const [aspectRatio, setAspectRatio] = useState('1:1');
 
   const onSubmitHandler = async (e) => {
     e.preventDefault();
@@ -72,12 +73,11 @@ const Generate = () => {
       <form onSubmit={onSubmitHandler} action="" className='flex md:flex-row flex-col items-start gap-5 items-center min-h-[160px]'>
         {/* prompt box */}
         <textarea onChange={(e) => setPrompt(e.target.value)} value={prompt} placeholder='Enter prompt...' name="" id="" className='bg-neutral-900 text-white md:w-150 w-90 h-40 border-3 border-black rounded-xl p-2 text-xl overflow-hidden opacity-75 focus:outline-none'></textarea>
-        {/* generate button  */}
+        {/* generate and style button  */}
         <div className='flex md:flex-col flex-row gap-4 md:gap-0 md:h-[160px] h-[60px] justify-around relative'>
           <button type='submit' className='bg-neutral-900 text-neutral-200 px-10 py-4 rounded-xl border-3 border-black cursor-pointer hover:border-neutral-200 transition-all duration-500 font-semibold'>
             GENERATE
           </button>
-          {/* style button */}
           <div className='group'>
             <button type='button' onClick={() => setShowStyles(!showStyles)} className='relative z-0 bg-neutral-900 text-neutral-200 px-10 py-4 rounded-xl border-3 border-black cursor-pointer hover:border-neutral-200 transition-all duration-500 font-semibold min-w-44'>
               {style && <img src={style === 'anime' ? assets.anime_image : style === 'ghibli' ? assets.ghibli_image : style === 'realistic' ? assets.realistic_image : style === 'logo' ? assets.logo_image : ''} alt="" className='absolute h-full w-full object-cover rounded-xl bottom-0 left-0 opacity-70 z-0' />}
@@ -104,6 +104,20 @@ const Generate = () => {
               </button>
             </div>
           </div>
+        </div>
+        <div className='flex flex-col justify-around md:h-[160px] h-[60px]'>
+          <button type='button' onClick={()=>setAspectRatio('16:9')} className={`flex items-center justify-center gap-4 bg-neutral-900 text-neutral-200 w-30 h-10 cursor-pointer rounded-lg border-3 ${aspectRatio === '16:9' ? 'border-red-400/90' : 'border-black'}`}>
+            <div className='w-7 h-3.5 border-2 border-white'></div>
+            <span>16:9</span>
+          </button>
+          <button type='button' onClick={()=>setAspectRatio('1:1')} className={`flex items-center justify-center gap-4 bg-neutral-900 text-neutral-200 w-30 h-10 cursor-pointer rounded-lg border-3 ${aspectRatio === '1:1' ? 'border-red-400/90' : 'border-black'}`}>
+            <div className='w-5 h-5 border-2 border-white'></div>
+            <span>1:1</span>
+          </button>
+          <button type='button' onClick={()=>setAspectRatio('9:16')} className={`flex items-center justify-center gap-4 bg-neutral-900 text-neutral-200 w-30 h-10 cursor-pointer rounded-lg border-3 ${aspectRatio === '9:16' ? 'border-red-400/90' : 'border-black'}`}>
+            <div className='w-3.5 h-6 border-2 border-white'></div>
+            <span>9:16</span>
+          </button>
         </div>
       </form>
     </div>
