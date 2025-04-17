@@ -18,6 +18,10 @@ import anime_image from './anime_image.jpg';
 import logo_image from './logo_image.jpg';
 import realistic_image from './realistic_image.jpg';
 import menu from './menu.png';
+import image_1_1 from './1-1-image.jpg'
+import image_16_9 from './16-9-image.jpg'
+import image_9_16 from './9-16-image.jpg'
+import image_2_3 from './2-3-image.jpg'
 
 export const assets = {
     logo,
@@ -39,5 +43,9 @@ export const assets = {
     anime_image,
     logo_image,
     realistic_image,
-    menu
+    menu,
+    image_1_1,
+    image_16_9,
+    image_9_16,
+    image_2_3
 }

@@ -4,7 +4,7 @@ import axios from 'axios';
 const generateImage = async (req,res) => {
     try {
           const userId = req.userId;
-          const {prompt, style} = req.body;
+          const {prompt, style, aspectRatio} = req.body;
           const user = await userModel.findById(userId);
           let stylePrompt = '';
           if(style==='anime')
@@ -42,7 +42,8 @@ const generateImage = async (req,res) => {
             'https://api.stability.ai/v2beta/stable-image/generate/ultra',
             {
                 prompt: finalPrompt,
-                output_format: 'webp'
+                output_format: 'webp',
+                aspect_ratio: aspectRatio
             },
             {
                 validateStatus: ()=>true,

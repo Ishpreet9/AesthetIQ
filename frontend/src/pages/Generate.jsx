@@ -12,14 +12,16 @@ const Generate = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [showStyles, setShowStyles] = useState(false);
   const [aspectRatio, setAspectRatio] = useState('1:1');
+  const [imageRatio, setImageRatio] = useState('');
 
   const onSubmitHandler = async (e) => {
     e.preventDefault();
     setIsLoading(true);
     try {
-      const response = await axios.post(backendUrl + '/api/image/generate-image', { prompt, style }, { withCredentials: true });
+      const response = await axios.post(backendUrl + '/api/image/generate-image', { prompt, style, aspectRatio }, { withCredentials: true });
 
       if (response.data.success) {
+        setImageRatio(aspectRatio);
         setImage(response.data.resultImage);
         console.log(response.data.message);
       }
@@ -50,7 +52,7 @@ const Generate = () => {
   return (
     <div className='flex flex-col gap-6 text-center justify-center items-center mt-12'>
       {/* image section */}
-      <div className='bg-neutral-700 w-60 h-60'>
+      <div className={`bg-neutral-700 ${imageRatio === '1:1' ? 'w-60 h-60' : imageRatio === '16:9' ? 'md:w-108 md:h-60 w-90 h-51' : 'w-45 h-65'}`}>
         {isLoading ?
           <div className='flex justify-center items-center h-full'>
             <Loader />
@@ -114,9 +116,9 @@ const Generate = () => {
             <div className='w-5 h-5 border-2 border-white'></div>
             <span>1:1</span>
           </button>
-          <button type='button' onClick={()=>setAspectRatio('9:16')} className={`flex items-center justify-center gap-4 bg-neutral-900 text-neutral-200 md:w-30 w-26 md:h-10 h-12 cursor-pointer rounded-lg border-3 ${aspectRatio === '9:16' ? 'border-red-400/90' : 'border-black'}`}>
+          <button type='button' onClick={()=>setAspectRatio('2:3')} className={`flex items-center justify-center gap-4 bg-neutral-900 text-neutral-200 md:w-30 w-26 md:h-10 h-12 cursor-pointer rounded-lg border-3 ${aspectRatio === '2:3' ? 'border-red-400/90' : 'border-black'}`}>
             <div className='w-3.5 h-6 border-2 border-white'></div>
-            <span>9:16</span>
+            <span>2:3</span>
           </button>
         </div>
       </form>
