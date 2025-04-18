@@ -53,7 +53,7 @@ const Navbar = () => {
                     <img src={assets.star} alt="" className='w-5' />
                   </button>
                 </NavLink>
-                <div className='border-3 border-black rounded-full group'>
+                <div className='md:block hidden border-3 border-black rounded-full group'>
                   <NavLink to={'/login'}>
                     <img src={assets.profile} alt="" className='w-10 filter invert cursor-pointer' />
                   </NavLink>
@@ -61,6 +61,9 @@ const Navbar = () => {
                     <button onClick={logoutHandler} type='button' className='hover:bg-neutral-400 py-1 px-6 cursor-pointer'>LogOut</button>
                   </div>
                 </div>
+                <button onClick={logoutHandler} className='md:hidden flex items-center bg-neutral-200 py-1 px-2 rounded-full border-3 border-black font-bold cursor-pointer'>
+                    <img src={assets.logout} alt="" className='w-8' />
+                  </button>
               </div>
             :
             <div>
