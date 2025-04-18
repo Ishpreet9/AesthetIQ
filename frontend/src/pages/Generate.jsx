@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { assets } from '../assets/assets'
 import axios from 'axios';
 import { AppContext } from '../context/AppContext';
@@ -6,7 +6,7 @@ import Loader from '../components/Loader';
 
 const Generate = () => {
 
-  const { backendUrl, image, setImage } = useContext(AppContext);
+  const { backendUrl, image, setImage, getCredits } = useContext(AppContext);
   const [prompt, setPrompt] = useState('');
   const [style, setStyle] = useState('');
   const [isLoading, setIsLoading] = useState(false);
@@ -21,6 +21,7 @@ const Generate = () => {
       const response = await axios.post(backendUrl + '/api/image/generate-image', { prompt, style, aspectRatio }, { withCredentials: true });
 
       if (response.data.success) {
+        getCredits();
         setImageRatio(aspectRatio);
         setImage(response.data.resultImage);
         console.log(response.data.message);
@@ -48,6 +49,10 @@ const Generate = () => {
       console.log("Image not available to download");
     }
   }
+
+  useEffect(()=>{
+    setImageRatio('1:1');
+  },[]);
 
   return (
     <div className='flex flex-col gap-6 text-center justify-center items-center mt-12'>

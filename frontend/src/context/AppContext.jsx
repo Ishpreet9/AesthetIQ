@@ -9,10 +9,6 @@ const AppContextProvider = (props) => {
     const [credits,setCredits] = useState(false);
     const [image,setImage] = useState('');
 
-    const value = {
-        user, setUser, backendUrl, credits, setCredits, image, setImage
-    }
-
     const getCredits = async () => {
         const response = await axios.post(backendUrl+'/api/user/credits',{user},{withCredentials:true});
         if(response.data.success)
@@ -23,6 +19,10 @@ const AppContextProvider = (props) => {
             console.log(response.data.user.name);
             console.log(response);
         }
+    }
+
+    const value = {
+        user, setUser, backendUrl, credits, setCredits, image, setImage, getCredits
     }
 
     useEffect(()=>{
