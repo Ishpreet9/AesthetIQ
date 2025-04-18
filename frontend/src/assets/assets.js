@@ -23,6 +23,7 @@ import image_16_9 from './16-9-image.jpg'
 import image_9_16 from './9-16-image.jpg'
 import image_2_3 from './2-3-image.jpg'
 import logout from './logout.png';
+import cross from './cross.png'
 
 export const assets = {
     logo,
@@ -49,5 +50,6 @@ export const assets = {
     image_16_9,
     image_9_16,
     image_2_3,
-    logout
+    logout,
+    cross
 }

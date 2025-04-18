@@ -2,5 +2,6 @@
 
 body{
     @apply bg-neutral-800;
+    margin: 0;
 }
 
