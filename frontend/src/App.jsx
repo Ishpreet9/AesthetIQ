@@ -5,7 +5,7 @@ import Navbar from './components/Navbar';
 import BuyCredits from './pages/BuyCredits';
 import Generate from './pages/Generate';
 import Login from './pages/Login';
-
+import { ToastContainer } from 'react-toastify';
 
 const App = () => {
 
@@ -36,6 +36,7 @@ const App = () => {
 
   return (
     <div className='min-h-screen'>
+      <ToastContainer theme='dark' position='bottom-left'/>
       <RouterProvider router={router} />
     </div>
   )

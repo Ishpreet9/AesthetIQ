@@ -4,17 +4,18 @@ import axios from 'axios';
 import { AppContext } from '../context/AppContext';
 import Loader from '../components/Loader';
 import ImageBox from '../components/ImageBox';
+import { toast } from 'react-toastify';
 
 const Generate = () => {
 
-  const { backendUrl, image, setImage, getCredits } = useContext(AppContext);
+  const { backendUrl, image, setImage, credits, getCredits } = useContext(AppContext);
   const [prompt, setPrompt] = useState('');
   const [style, setStyle] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [showStyles, setShowStyles] = useState(false);
   const [aspectRatio, setAspectRatio] = useState('1:1');
   const [imageRatio, setImageRatio] = useState('');
-  const [showImageBox,setShowImageBox] = useState(false);
+  const [showImageBox, setShowImageBox] = useState(false);
 
   const onSubmitHandler = async (e) => {
     e.preventDefault();
@@ -23,15 +24,25 @@ const Generate = () => {
       const response = await axios.post(backendUrl + '/api/image/generate-image', { prompt, style, aspectRatio }, { withCredentials: true });
 
       if (response.data.success) {
+        toast.success("Image generated successfully");
         getCredits();
         setImageRatio(aspectRatio);
         setImage(response.data.resultImage);
         console.log(response.data.message);
       }
       else {
+        toast.error("Image generation failed!");
         console.log("Image not generated!");
       }
     } catch (error) {
+      if(credits===0)
+      {
+        toast.error("Not Enough Credits!")
+      }
+      else
+      {
+        toast.error("Image generation failed!");
+      }
       console.log(error);
     } finally {
       setIsLoading(false);
@@ -46,8 +57,10 @@ const Generate = () => {
       document.body.appendChild(link);
       link.click();
       document.body.removeChild(link);
+      toast.success("Image saved")
     }
     else {
+      toast.error("Unable to download image!")
       console.log("Image not available to download");
     }
   }
@@ -58,10 +71,10 @@ const Generate = () => {
 
   return (
     <div className='flex flex-col items-center justify-center'>
-      {showImageBox ? <ImageBox image={image} setShowImageBox={setShowImageBox} downloadImage={downloadImage}/> : <div className='hidden'></div>}
+      {showImageBox ? <ImageBox image={image} setShowImageBox={setShowImageBox} downloadImage={downloadImage} /> : <div className='hidden'></div>}
       <div className='flex flex-col gap-6 text-center justify-center items-center mt-12'>
         {/* image section */}
-        <div onClick={()=>{setShowImageBox(true)}} className={`bg-neutral-700 cursor-pointer ${imageRatio === '1:1' ? 'w-60 h-60' : imageRatio === '16:9' ? 'md:w-108 md:h-60 w-90 h-51' : 'w-45 h-65'}`}>
+        <div onClick={() => { setShowImageBox(true) }} className={`bg-neutral-700 cursor-pointer ${imageRatio === '1:1' ? 'w-60 h-60' : imageRatio === '16:9' ? 'md:w-108 md:h-60 w-90 h-51' : 'w-45 h-65'}`}>
           {isLoading ?
             <div className='flex justify-center items-center h-full'>
               <Loader />

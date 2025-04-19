@@ -50,7 +50,7 @@ const Navbar = () => {
                 <NavLink to={'/buy'}>
                   <button className='flex gap-2 items-center bg-neutral-200 p-2 rounded-full border-3 border-black font-semibold cursor-pointer'>
                     <p>{`Credits left: ${credits}`}</p>
-                    <img src={assets.star} alt="" className='w-5' />
+                    <img src={assets.coin} alt="" className='w-6' />
                   </button>
                 </NavLink>
                 <div className='md:block hidden border-3 border-black rounded-full group'>
