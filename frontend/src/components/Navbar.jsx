@@ -37,10 +37,10 @@ const Navbar = () => {
 
   return (
     <div className='flex flex-col justify-center '>
-      <div className='md:py-2 py-3 flex justify-between items-center md:px-28 px-4'>
-        <div className='flex gap-6 items-center text-xl font-semibold italic'>
+      <div className='md:py-[1vh] py-3 flex justify-between items-center md:px-[6vw] px-4'>
+        <div className='flex gap-4 items-center text-[1.7vw] font-semibold italic'>
           <Link to='/'>
-            <img src={assets.logo} alt="" className='md:w-16 w-14 filter invert' />
+            <img src={assets.logo} alt="" className='md:w-[4.5vw] w-14 filter invert' />
           </Link>
           <p className='text-neutral-200 md:inline hidden'>{`Hello ${user}`}</p>
         </div>
@@ -48,16 +48,16 @@ const Navbar = () => {
           {user ?
               <div className='flex gap-4 mt-3 items-center'>
                 <NavLink to={'/buy'}>
-                  <button className='flex gap-2 items-center bg-neutral-200 p-2 rounded-full border-3 border-black font-semibold cursor-pointer'>
+                  <button className='flex gap-2 md:text-[1.3vw] items-center bg-neutral-200 md:p-[0.5vw] p-2 rounded-full border-3 border-black font-semibold cursor-pointer'>
                     <p>{`Credits left: ${credits}`}</p>
-                    <img src={assets.coin} alt="" className='w-6' />
+                    <img src={assets.coin} alt="" className='md:w-[1.9vw] w-6' />
                   </button>
                 </NavLink>
                 <div className='md:block hidden border-3 border-black rounded-full group'>
                   <NavLink to={'/login'}>
-                    <img src={assets.profile} alt="" className='w-10 filter invert cursor-pointer' />
+                    <img src={assets.profile} alt="" className='w-[3vw] filter invert cursor-pointer' />
                   </NavLink>
-                  <div className='absolute opacity-0 invisible group-hover:opacity-100 group-hover:visible top-17 right-20 bg-neutral-300 border-3 border-black font-semibold cursor-pointer rounded-md overflow-hidden transition-all duration-500'>
+                  <div className='absolute opacity-0 invisible group-hover:opacity-100 group-hover:visible top-[9vh] right-[3.5vw] bg-neutral-300 border-3 border-black font-semibold cursor-pointer rounded-md overflow-hidden transition-all duration-500'>
                     <button onClick={logoutHandler} type='button' className='hover:bg-neutral-400 py-1 px-6 cursor-pointer'>LogOut</button>
                   </div>
                 </div>
@@ -86,10 +86,10 @@ const Navbar = () => {
               </div>
               <div className='flex items-center gap-4 md:gap-8 mt-2 text-lg font-semibold md:visible invisible md:flex hidden'>
                 <NavLink to={'/buy'}>
-                  <button className='bg-gray-200 text-black rounded-full px-4 py-2 border-3 border-black w-30 cursor-pointer'>Pricing</button>
+                  <button className='bg-gray-200 text-black rounded-full py-[1vh] border-3 border-black w-[8vw] cursor-pointer'>Pricing</button>
                 </NavLink>
                 <NavLink to={'/login'}>
-                  <button className='bg-gray-200 text-black rounded-full px-4 py-2 cursor-pointer border-3 border-black w-30'>Login</button>
+                  <button className='bg-gray-200 text-black rounded-full py-[1vh] cursor-pointer border-3 border-black w-[8vw]'>Login</button>
                 </NavLink>
               </div>
             </div>

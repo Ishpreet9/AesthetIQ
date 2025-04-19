@@ -24,9 +24,9 @@ const Steps = () => {
       ];
     
       return (
-        <div className="max-w-4xl mx-auto px-4 py-20">
-          <div className="text-center mb-12">
-            <h2 className="text-5xl font-bold text-neutral-200 mb-4">
+        <div className="max-w-4xl mx-auto px-4 md:py-[11vh] py-20">
+          <div className="text-center md:mb-[3vw] mb-12">
+            <h2 className="md:text-[4vw] text-5xl font-bold text-neutral-200 mb-4">
               Create with Confidence
             </h2>
             <p className="text-md text-neutral-400 bg-neutral-700 inline-flex px-6 py-1 rounded-full">
@@ -34,11 +34,11 @@ const Steps = () => {
             </p>
           </div>
     
-          <div className="flex flex-col gap-8 ">
+          <div className="flex flex-col gap-[4vh] ">
             {steps.map((step) => (
               <div
                 key={step.step}
-                className="flex items-center p-6 bg-neutral-700 rounded-lg transition-all hover:shadow-xl hover:scale-102 transition-all duration-500 cursor-pointer"
+                className="flex items-center p-[2vh] bg-neutral-700 rounded-lg transition-all hover:shadow-xl hover:scale-102 transition-all duration-500 cursor-pointer"
               >
                 {/* Icon container */}
                 <div className="w-16 h-16 rounded-lg flex items-center justify-center mr-6 bg-neutral-600">
