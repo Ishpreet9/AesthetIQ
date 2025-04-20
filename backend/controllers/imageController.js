@@ -1,3 +1,4 @@
+import cloudinary from "../config/cloudinary.js";
 import userModel from "../models/userModel.js";
 import axios from 'axios';
 
@@ -60,14 +61,32 @@ const generateImage = async (req,res) => {
             return res.status(502).json({success:false, message:'Failed to generate image', details:response.data.toString()});
           }
 
-          const base64image = Buffer.from(response.data).toString('base64');
-          const resultImage = `data:image/webp;base64,${base64image}`;
+          // const base64image = Buffer.from(response.data).toString('base64');
+          // const resultImage = `data:image/webp;base64,${base64image}`;
+
+          //convert ArrayBuffer to Buffer
+          const imageBuffer = Buffer.from(response.data);
+
+          const result = await new Promise((resolve,reject)=>{
+            const uploadStream = cloudinary.uploader.upload_stream(
+              { 
+                resource_type: 'image',
+                folder: 'generated_images'
+              }, (error, result) =>{
+                if(error) reject(error);
+                else resolve(result);
+              }
+            );
+            uploadStream.end(imageBuffer);
+          });
+
+          const imageUrl = result.secure_url;
 
           //deducting credits after successful image generation 
           user.creditBalance -= 1;
           await user.save();
 
-          res.json({success: true, message: "Image generated",creditBalance:user.creditBalance, resultImage});
+          res.json({success: true, message: "Image generated",creditBalance:user.creditBalance, imageUrl});
 
     } catch (error) {
         console.log(error.message);
