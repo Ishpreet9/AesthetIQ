@@ -27,7 +27,7 @@ const Generate = () => {
         toast.success("Image generated successfully");
         getCredits();
         setImageRatio(aspectRatio);
-        setImage(response.data.resultImage);
+        setImage(response.data.imageUrl);
         console.log(response.data.message);
       }
       else {
