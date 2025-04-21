@@ -5,6 +5,7 @@ import { AppContext } from '../context/AppContext';
 import Loader from '../components/Loader';
 import ImageBox from '../components/ImageBox';
 import { toast } from 'react-toastify';
+import { Link } from 'react-router-dom';
 
 const Generate = () => {
 
@@ -72,7 +73,7 @@ const Generate = () => {
   return (
     <div className='flex flex-col items-center justify-center'>
       {showImageBox ? <ImageBox image={image} setShowImageBox={setShowImageBox} downloadImage={downloadImage} /> : <div className='hidden'></div>}
-      <div className='flex flex-col gap-6 text-center justify-center items-center mt-[7vh]'>
+      <div className='flex flex-col gap-6 text-center justify-center items-center mt-[6.7vh]'>
         {/* image section */}
         <div onClick={() => { setShowImageBox(true) }} className={`bg-neutral-700 cursor-pointer ${imageRatio === '1:1' ? 'md:w-[19vw] md:h-[19vw] w-60 h-60' : imageRatio === '16:9' ? 'md:w-[34vw] md:h-[19.4vw] w-90 h-51' : 'md:w-[13.4vw] md:h-[38vh] w-45 h-65'}`}>
           {isLoading ?
@@ -85,15 +86,21 @@ const Generate = () => {
               <img src={image} alt="" className='cursor-pointer' />
           }
         </div>
-        {/* download and share button */}
-        <div className='flex gap-10'>
+        {/* all generations button */}
+        <Link to={'/all-generations'} className='flex items-center gap-4 bg-neutral-700 text-neutral-300 text-[1.1vw] px-[2vw] py-[1.2vh] cursor-pointer border-2 border-transparent hover:border-neutral-300 transition-all duration-500'>
+          <img src={assets.menu} alt="" className='w-[1.8vw] invert opacity-70'/>
+          <span>
+          VIEW ALL GENERATIONS
+          </span>
+        </Link>
+        {/* <div className='flex gap-10'>
           <div className='bg-neutral-700 md:w-[4vw] md:h-[4vw] w-13 h-13 rounded-md cursor-pointer flex items-center justify-center'>
             <img src={assets.download} onClick={downloadImage} alt="" className='md:w-[3vw] w-10 filter invert opacity-60' />
           </div>
           <div className='bg-neutral-700 md:w-[4vw] md:h-[4vw] w-13 h-13 rounded-md cursor-pointer flex items-center justify-center'>
             <img src={assets.share} alt="" className='md:w-[2.5vw] w-8 filter invert opacity-60' />
           </div>
-        </div>
+        </div> */}
         <form onSubmit={onSubmitHandler} action="" className='flex md:flex-row flex-col items-start gap-5 items-center min-h-[160px]'>
           {/* prompt box */}
           <textarea onChange={(e) => setPrompt(e.target.value)} value={prompt} placeholder='Enter prompt...' name="" id="" className='bg-neutral-900 text-white md:w-[47vw] w-90 md:h-[13vw] h-40 border-3 border-black rounded-xl p-2 md:text-[1.7vw] text-xl overflow-y-scroll resize-none opacity-75 focus:outline-none custom-scroll'></textarea>

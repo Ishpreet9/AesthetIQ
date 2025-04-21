@@ -6,6 +6,7 @@ import BuyCredits from './pages/BuyCredits';
 import Generate from './pages/Generate';
 import Login from './pages/Login';
 import { ToastContainer } from 'react-toastify';
+import AllGenerations from './pages/AllGenerations';
 
 const App = () => {
 
@@ -29,6 +30,10 @@ const App = () => {
         {
           path: "/login",
           element: <Login />
+        },
+        {
+          path: "/all-generations",
+          element: <AllGenerations />
         }
       ]
     }

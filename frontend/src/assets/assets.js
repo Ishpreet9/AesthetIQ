@@ -25,6 +25,11 @@ import image_2_3 from './2-3-image.jpg'
 import logout from './logout.png';
 import cross from './cross.png';
 import coin from './coin.png';
+import all_icon from './all_icon.png';
+import bookmark_empty from './bookmark_empty.png';
+import bookmark_filled from './bookmark_filled.png';
+import grid_empty from './grid_empty.png';
+import grid_filled from './grid_filled.png';
 
 export const assets = {
     logo,
@@ -53,5 +58,10 @@ export const assets = {
     image_2_3,
     logout,
     cross,
-    coin
+    coin,
+    all_icon,
+    bookmark_empty,
+    bookmark_filled,
+    grid_empty,
+    grid_filled
 }
