@@ -8,6 +8,7 @@ const AppContextProvider = (props) => {
     const backendUrl = import.meta.env.VITE_BACKEND_URL;
     const [credits,setCredits] = useState(false);
     const [image,setImage] = useState('');
+    const [imageData,setImageData] = useState();
 
     const getCredits = async () => {
         const response = await axios.post(backendUrl+'/api/user/credits',{user},{withCredentials:true});
@@ -22,7 +23,7 @@ const AppContextProvider = (props) => {
     }
 
     const value = {
-        user, setUser, backendUrl, credits, setCredits, image, setImage, getCredits
+        user, setUser, backendUrl, credits, setCredits, image, setImage, getCredits, imageData, setImageData
     }
 
     useEffect(()=>{

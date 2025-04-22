@@ -30,6 +30,7 @@ import bookmark_empty from './bookmark_empty.png';
 import bookmark_filled from './bookmark_filled.png';
 import grid_empty from './grid_empty.png';
 import grid_filled from './grid_filled.png';
+import copy from './copy.png';
 
 export const assets = {
     logo,
@@ -63,5 +64,6 @@ export const assets = {
     bookmark_empty,
     bookmark_filled,
     grid_empty,
-    grid_filled
+    grid_filled,
+    copy
 }

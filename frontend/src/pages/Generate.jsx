@@ -9,7 +9,7 @@ import { Link } from 'react-router-dom';
 
 const Generate = () => {
 
-  const { backendUrl, image, setImage, credits, getCredits } = useContext(AppContext);
+  const { backendUrl, imageData, setImageData, image, setImage, credits, getCredits } = useContext(AppContext);
   const [prompt, setPrompt] = useState('');
   const [style, setStyle] = useState('');
   const [isLoading, setIsLoading] = useState(false);
@@ -27,9 +27,10 @@ const Generate = () => {
       if (response.data.success) {
         toast.success("Image generated successfully");
         getCredits();
-        setImageRatio(aspectRatio);
-        setImage(response.data.imageUrl);
+        setImage(response.data.imageData.url);
+        setImageData(response.data.imageData);
         console.log(response.data.message);
+        console.log(response.data);
       }
       else {
         toast.error("Image generation failed!");
@@ -50,40 +51,33 @@ const Generate = () => {
     }
   }
 
-  const downloadImage = () => {
-    if (image !== '') {
-      const link = document.createElement('a');
-      link.href = image;
-      link.download = 'generatedImage.webp'
-      document.body.appendChild(link);
-      link.click();
-      document.body.removeChild(link);
-      toast.success("Saving Image...")
-    }
-    else {
-      toast.error("Unable to download image!")
-      console.log("Image not available to download");
-    }
-  }
-
   useEffect(() => {
     setImageRatio('1:1');
   }, []);
 
   return (
     <div className='flex flex-col items-center justify-center'>
-      {showImageBox ? <ImageBox image={image} setShowImageBox={setShowImageBox} downloadImage={downloadImage} /> : <div className='hidden'></div>}
+      {showImageBox ? <ImageBox setShowImageBox={setShowImageBox} page={'generate'}/> : <div className='hidden'></div>}
       <div className='flex flex-col gap-6 text-center justify-center items-center mt-[6.7vh]'>
         {/* image section */}
-        <div onClick={() => { setShowImageBox(true) }} className={`bg-neutral-700 cursor-pointer ${imageRatio === '1:1' ? 'md:w-[19vw] md:h-[19vw] w-60 h-60' : imageRatio === '16:9' ? 'md:w-[34vw] md:h-[19.4vw] w-90 h-51' : 'md:w-[13.4vw] md:h-[38vh] w-45 h-65'}`}>
+        <div onClick={() => { 
+          if(imageData)
+          {
+            setShowImageBox(true)
+          }
+          else
+          {
+            setShowImageBox(false)
+          }
+          }} className={`bg-neutral-700 cursor-pointer ${ !imageData?.ratio || imageData.ratio === '1:1' ? 'md:w-[19vw] md:h-[19vw] w-60 h-60' : imageData.ratio === '16:9' ? 'md:w-[34vw] md:h-[19.4vw] w-90 h-51' : 'md:w-[13.4vw] md:h-[38vh] w-45 h-65'}`}>
           {isLoading ?
             <div className='flex justify-center items-center h-full'>
               <Loader />
             </div>
-            : image === '' ?
+            : !imageData ?
               <p></p>
               :
-              <img src={image} alt="" className='cursor-pointer' />
+              <img src={imageData.url} alt="" className='cursor-pointer' />
           }
         </div>
         {/* all generations button */}
@@ -93,14 +87,6 @@ const Generate = () => {
           VIEW ALL GENERATIONS
           </span>
         </Link>
-        {/* <div className='flex gap-10'>
-          <div className='bg-neutral-700 md:w-[4vw] md:h-[4vw] w-13 h-13 rounded-md cursor-pointer flex items-center justify-center'>
-            <img src={assets.download} onClick={downloadImage} alt="" className='md:w-[3vw] w-10 filter invert opacity-60' />
-          </div>
-          <div className='bg-neutral-700 md:w-[4vw] md:h-[4vw] w-13 h-13 rounded-md cursor-pointer flex items-center justify-center'>
-            <img src={assets.share} alt="" className='md:w-[2.5vw] w-8 filter invert opacity-60' />
-          </div>
-        </div> */}
         <form onSubmit={onSubmitHandler} action="" className='flex md:flex-row flex-col items-start gap-5 items-center min-h-[160px]'>
           {/* prompt box */}
           <textarea onChange={(e) => setPrompt(e.target.value)} value={prompt} placeholder='Enter prompt...' name="" id="" className='bg-neutral-900 text-white md:w-[47vw] w-90 md:h-[13vw] h-40 border-3 border-black rounded-xl p-2 md:text-[1.7vw] text-xl overflow-y-scroll resize-none opacity-75 focus:outline-none custom-scroll'></textarea>

@@ -82,16 +82,38 @@ const generateImage = async (req,res) => {
 
           const imageUrl = result.secure_url;
 
+          //saving the imageUrl and prompt 
+          const imageData = {url: imageUrl, prompt: prompt, style: style, ratio: aspectRatio};
+          user.images.push(imageData);
+
           //deducting credits after successful image generation 
           user.creditBalance -= 1;
           await user.save();
 
-          res.json({success: true, message: "Image generated",creditBalance:user.creditBalance, imageUrl});
+          return res.status(200).json({success: true, message: "Image generated",creditBalance:user.creditBalance, imageData});
 
     } catch (error) {
         console.log(error.message);
-        return res.status(500).json({success:false, message:error.message})
+        return res.status(500).json({success:false, message:error.message});
     }
 }
 
-export {generateImage};
+const getAllImages = async (req,res) => {
+  try {
+    const userId = req.userId;
+    const user = await userModel.findById(userId);
+    if(!user)
+    {
+      return res.status(400).json({success:false, message:'Missing details'})
+    }
+    else
+    {
+      const imagesData = user.images;
+      return res.status(200).json({success:true, imagesData});
+    }
+  } catch (error) {
+    return res.status(500).json({success:false, message:error.message});
+  }
+}
+
+export {generateImage, getAllImages};

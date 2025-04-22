@@ -14,7 +14,17 @@ const userSchema = new mongoose.Schema({
   createdAt:{
     type: Date,
     default: Date.now
-  }
+  },
+  images: [
+    {
+      url: { type: String },
+      prompt: { type: String },
+      style: { type: String },
+      ratio: { type: String },
+      createdAt: { type: Date, default: Date.now }
+    }
+  ],
+  bookmarkedImageUrls: [String]
 });
 
 const userModel = mongoose.models.user || mongoose.model("user", userSchema);
