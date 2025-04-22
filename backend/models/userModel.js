@@ -21,10 +21,10 @@ const userSchema = new mongoose.Schema({
       prompt: { type: String },
       style: { type: String },
       ratio: { type: String },
+      bookmark: { type: Boolean, default: false },
       createdAt: { type: Date, default: Date.now }
     }
-  ],
-  bookmarkedImageUrls: [String]
+  ]
 });
 
 const userModel = mongoose.models.user || mongoose.model("user", userSchema);

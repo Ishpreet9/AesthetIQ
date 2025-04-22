@@ -116,4 +116,50 @@ const getAllImages = async (req,res) => {
   }
 }
 
-export {generateImage, getAllImages};
+const addBookmark = async (req,res) => {
+  try {
+    const userId = req.userId;
+    const {imageUrl} = req.body;
+  
+    const user = await userModel.findById(userId);
+    if(!user)
+    {
+      return res.status(400).json({success:false, message:'Missing details'}); 
+    }
+    const image = user.images.find(img => img.url === imageUrl);
+    if(!image)
+    {
+      return res.status(404).json({success:false, message:'Image not found'});
+    }
+    image.bookmark = true;
+    await user.save();
+    return res.status(200).json({success:true, message:'Image Bookmarked'})
+  } catch (error) {
+    return res.status(500).json({success:false, message:error.message});
+  }
+}
+
+const removeBookmark = async (req,res) => {
+  try {
+    const userId = req.userId;
+    const {imageUrl} = req.body;
+  
+    const user = await userModel.findById(userId);
+    if(!user)
+    {
+      return res.status(400).json({success:false, message:'Missing details'}); 
+    }
+    const image = user.images.find(img => img.url === imageUrl);
+    if(!image)
+    {
+      return res.status(404).json({success:false, message:'Image not found'});
+    }
+    image.bookmark = false;
+    await user.save();
+    return res.status(200).json({success:true, message:'Bookmark Removed'})
+  } catch (error) {
+    return res.status(500).json({success:false, message:error.message});
+  }
+}
+
+export {generateImage, getAllImages, addBookmark, removeBookmark};

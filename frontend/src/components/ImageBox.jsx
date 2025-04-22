@@ -2,13 +2,77 @@ import React, { useContext, useEffect, useState } from 'react'
 import { assets } from '../assets/assets'
 import { AppContext } from '../context/AppContext'
 import { toast } from 'react-toastify';
+import axios from 'axios';
 
 
 const imageBox = ({setShowImageBox, page}) => {
   
-  const { imageData, setImageData } = useContext(AppContext);
+  const { imageData, setImageData, backendUrl } = useContext(AppContext);
+  const [isBookmarked, setIsBookmarked] = useState(imageData.bookmark);
 
-    // needs updating for download
+    const addBookmark = async () => {
+      if(imageData?.url)
+      {
+        try {
+          const response = await axios.post(backendUrl+'/api/image/add-bookmark',{imageUrl:imageData.url},{withCredentials: true});
+          if(response.data.success)
+          {
+            setIsBookmarked(true);
+            toast.success('Image Bookmarked');
+            console.log('Image bookmarked')
+          }
+          else
+          {
+            toast.error('Image not bookmarked');
+            console.log('Image not bookmarked');
+          }
+        } catch (error) {
+          toast.error('An error occured while bookmarking');
+          console.log(error); 
+        }
+      }
+      else{
+        console.log('Image url not available');
+      }
+    }
+
+    const removeBookmark = async () => {
+      if(imageData?.url)
+      {
+        try {
+          const response = await axios.post(backendUrl+'/api/image/remove-bookmark',{imageUrl:imageData.url},{withCredentials: true});
+          if(response.data.success)
+          {
+            setIsBookmarked(false);
+            toast.success('Bookmark Removed');
+            console.log('Bookmark Removed')
+          }
+          else
+          {
+            toast.error('Bookmark not removed');
+            console.log('Bookmark not removed');
+          }
+        } catch (error) {
+          toast.error('An error occured while removing bookmark');
+          console.log(error); 
+        }
+      }
+      else{
+        console.log('Image url not available');
+      }
+    }
+
+    const toggleBookmark = async (req,res) => {
+      if(isBookmarked)
+      {
+        await removeBookmark();
+      }
+      else
+      {
+        await addBookmark();
+      }
+    }
+    
     const downloadImage = async () => {
       if (imageData?.url) {
         try {
@@ -50,10 +114,10 @@ const imageBox = ({setShowImageBox, page}) => {
           </button>
           <p className='text-neutral-300 whitespace-nowrap overflow-scroll custom-scroll max-w-[50vw]'>{imageData.prompt}</p>
         </div>
-        <div className='bg-neutral-800 px-[1vw] rounded-sm'>
+        <div className='bg-neutral-800 px-[1vw] rounded-sm text-neutral-300'>
           <p>{imageData.style === 'anime' ? 'Anime' : imageData.style === 'ghibli' ? 'Ghibli' : imageData.style === 'realistic' ? 'Realistic' : imageData.style === 'logo' ? 'Logo' : 'None'}</p>
         </div>
-        <div className='bg-neutral-800 px-[1vw] rounded-sm'>
+        <div className='bg-neutral-800 px-[1vw] rounded-sm text-neutral-300'>
           <p>{imageData.ratio === '1:1' ? '1:1' : imageData.ratio === '16:9' ? '16:9' : imageData.ratio === '2:3' ? '2:3' : 'err'}</p>
         </div>
       </div>
@@ -76,8 +140,8 @@ const imageBox = ({setShowImageBox, page}) => {
         <button onClick={()=>{downloadImage()}} className='bg-neutral-700 w-[7vh] h-[7vh] rounded-xl md:p-[0.5vw] p-2 cursor-pointer hover:border-2 border-neutral-300'>
           <img src={assets.download} alt="" className='invert opacity-40'/>
         </button>
-        <button className='bg-neutral-700 w-[7vh] h-[7vh] rounded-xl md:p-[0.7vw] p-3 cursor-pointer hover:border-2 border-neutral-300'>
-          <img src={assets.share} alt="" className='invert opacity-40'/>
+        <button onClick={()=>toggleBookmark()} className='bg-neutral-700 w-[7vh] h-[7vh] rounded-xl md:p-[0.7vw] p-3 cursor-pointer hover:border-2 border-neutral-300'>
+          <img src={isBookmarked ? assets.bookmark_filled : assets.bookmark_empty} alt="" className='invert opacity-40'/>
         </button>
       </div>
     </div>
