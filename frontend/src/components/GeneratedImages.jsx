@@ -38,7 +38,7 @@ const GeneratedImages = ({setShowImageBox}) => {
                     <div onClick={()=>{
                       setShowImageBox(true);
                       setImageData(image);
-                    }} key={index} className='aspect-square overflow-hidden'>
+                    }} key={index} className='aspect-square overflow-hidden cursor-pointer'>
                         <img src={image.url} alt="" className='object-contain w-full h-full'/>
                     </div>
                 ))}

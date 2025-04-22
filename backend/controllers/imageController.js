@@ -43,7 +43,7 @@ const generateImage = async (req,res) => {
             'https://api.stability.ai/v2beta/stable-image/generate/ultra',
             {
                 prompt: finalPrompt,
-                output_format: 'webp',
+                output_format: 'png',
                 aspect_ratio: aspectRatio
             },
             {
@@ -62,7 +62,7 @@ const generateImage = async (req,res) => {
           }
 
           // const base64image = Buffer.from(response.data).toString('base64');
-          // const resultImage = `data:image/webp;base64,${base64image}`;
+          // const resultImage = `data:image/png;base64,${base64image}`;
 
           //convert ArrayBuffer to Buffer
           const imageBuffer = Buffer.from(response.data);

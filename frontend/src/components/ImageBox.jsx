@@ -1,24 +1,38 @@
 import React, { useContext, useEffect, useState } from 'react'
 import { assets } from '../assets/assets'
 import { AppContext } from '../context/AppContext'
+import { toast } from 'react-toastify';
+
 
 const imageBox = ({setShowImageBox, page}) => {
   
   const { imageData, setImageData } = useContext(AppContext);
 
     // needs updating for download
-    const downloadImage = () => {
-      if (imageData) {
-        const link = document.createElement('a');
-        link.href = imageData.url;
-        link.download = 'generatedImage.webp'
-        document.body.appendChild(link);
-        link.click();
-        document.body.removeChild(link);
-        toast.success("Saving Image...")
+    const downloadImage = async () => {
+      if (imageData?.url) {
+        try {
+          const response = await fetch(imageData.url,{mode: 'cors'});
+
+          if(!response.ok) throw new Error;
+  
+          const blob = await response.blob();
+          const url = URL.createObjectURL(blob);
+  
+          const link = document.createElement('a');
+          link.href = url; 
+          link.download = 'generatedImage.png'
+          document.body.appendChild(link);
+          link.click();
+          document.body.removeChild(link);
+          URL.revokeObjectURL(url);
+          toast.success("Saving Image...");
+        } catch (error) {
+          console.error("Download failed", error);
+          toast.error("Unable to download image!");
+        }
       }
       else {
-        toast.error("Unable to download image!")
         console.log("Image not available to download");
       }
     }
@@ -27,12 +41,22 @@ const imageBox = ({setShowImageBox, page}) => {
     <div className='fixed z-20 bg-black text-white w-[95vw] h-[96vh] flex flex-col justify-between md:mb-14 mb-4'>
       {/* top section */}
       <div className='flex items-center justify-between bg-neutral-900 w-full h-[6vh] md:px-10 px-4'>
+      {/* image details */}
+      <div className='flex gap-[1vw]'>
+
         <div className='flex gap-[0.5vw] bg-neutral-800 px-[1vw] items-center rounded-sm'>
           <button className='border-[0.1vw] border-neutral-500 p-[0.2vw] rounded-sm cursor-pointer'>
           <img src={assets.copy} alt="" className='w-[1.1vw] h-[2.3vh] invert opacity-70'/>
           </button>
           <p className='text-neutral-300 whitespace-nowrap overflow-scroll custom-scroll max-w-[50vw]'>{imageData.prompt}</p>
         </div>
+        <div className='bg-neutral-800 px-[1vw] rounded-sm'>
+          <p>{imageData.style === 'anime' ? 'Anime' : imageData.style === 'ghibli' ? 'Ghibli' : imageData.style === 'realistic' ? 'Realistic' : imageData.style === 'logo' ? 'Logo' : 'None'}</p>
+        </div>
+        <div className='bg-neutral-800 px-[1vw] rounded-sm'>
+          <p>{imageData.ratio === '1:1' ? '1:1' : imageData.ratio === '16:9' ? '16:9' : imageData.ratio === '2:3' ? '2:3' : 'err'}</p>
+        </div>
+      </div>
         <button onClick={()=>{
           setShowImageBox(false);
           if(page === 'all-generations')
