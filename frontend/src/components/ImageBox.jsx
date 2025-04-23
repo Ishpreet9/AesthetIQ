@@ -7,7 +7,7 @@ import axios from 'axios';
 
 const imageBox = ({setShowImageBox, page}) => {
   
-  const { imageData, setImageData, backendUrl } = useContext(AppContext);
+  const { imageData, setImageData, backendUrl, setBookmarkChange, bookmarkChange } = useContext(AppContext);
   const [isBookmarked, setIsBookmarked] = useState(imageData.bookmark);
 
     const addBookmark = async () => {
@@ -62,14 +62,18 @@ const imageBox = ({setShowImageBox, page}) => {
       }
     }
 
-    const toggleBookmark = async (req,res) => {
+    const toggleBookmark = async () => {
       if(isBookmarked)
+        {
+          await removeBookmark();
+        }
+        else
+        {
+          await addBookmark();
+        }
+      if(page==='all-generations')
       {
-        await removeBookmark();
-      }
-      else
-      {
-        await addBookmark();
+        setBookmarkChange(!bookmarkChange);
       }
     }
     
@@ -137,10 +141,10 @@ const imageBox = ({setShowImageBox, page}) => {
       </div>
       {/* bottom section */}
       <div className=' flex md:flex-col gap-5 items-center justify-end pr-5 z-30 absolute right-0 bottom-5'>
-        <button onClick={()=>{downloadImage()}} className='bg-neutral-700 w-[7vh] h-[7vh] rounded-xl md:p-[0.5vw] p-2 cursor-pointer hover:border-2 border-neutral-300'>
+        <button onClick={()=>{downloadImage()}} className='bg-neutral-700 w-[7vh] h-[7vh] rounded-xl md:p-[0.4vw] p-2 cursor-pointer hover:border-2 border-neutral-300'>
           <img src={assets.download} alt="" className='invert opacity-40'/>
         </button>
-        <button onClick={()=>toggleBookmark()} className='bg-neutral-700 w-[7vh] h-[7vh] rounded-xl md:p-[0.7vw] p-3 cursor-pointer hover:border-2 border-neutral-300'>
+        <button onClick={()=>toggleBookmark()} className='bg-neutral-700 w-[7vh] h-[7vh] rounded-xl md:p-[0.8vw] p-3 cursor-pointer hover:border-2 border-neutral-300'>
           <img src={isBookmarked ? assets.bookmark_filled : assets.bookmark_empty} alt="" className='invert opacity-40'/>
         </button>
       </div>

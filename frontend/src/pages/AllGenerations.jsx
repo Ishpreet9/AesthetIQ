@@ -12,7 +12,7 @@ const AllGenerations = () => {
       {showImageBox ? <ImageBox setShowImageBox={setShowImageBox} page={'all-generations'}/> : <div className='hidden'></div>}
     <div className='grid grid-cols-[10vw_1fr] px-[5vw]'>
       <Sidebar activeView={activeView} setActiveView={setActiveView}/>
-      <GeneratedImages setShowImageBox={setShowImageBox}/>
+      <GeneratedImages setShowImageBox={setShowImageBox} activeView={activeView} />
     </div>
     </div>
   )
