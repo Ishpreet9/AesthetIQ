@@ -33,15 +33,30 @@ const GeneratedImages = ({ setShowImageBox, activeView }) => {
 
   return (
     <div className='p-[1vw]'>
-      <div className='w-full h-[85vh] overflow-scroll custom-scroll border-3 border-neutral-800 grid grid-cols-5 gap-[1vw] p-[1vw] auto-rows-min'>
-        {imagesData && (activeView === 'bookmarks' ? imagesData.filter(image => image.bookmark === true) : imagesData).map((image, index) => (
-          <div onClick={() => {
-            setShowImageBox(true);
-            setImageData(image);
-          }} key={index} className='aspect-square overflow-hidden cursor-pointer'>
-            <img src={image.url} alt="" className='object-contain w-full h-full' />
-          </div>
-        ))}
+      <div className='w-full md:h-[85vh] h-[660px] overflow-scroll custom-scroll border-3 border-neutral-800 grid md:grid-cols-4 grid-cols-1 md:gap-[1vw] gap-4 p-[1vw] auto-rows-min'>
+        {imagesData && (
+          (activeView === 'bookmarks'   //getting final images data based on bookmarks or not
+            ? imagesData.filter(image => image.bookmark)
+            : imagesData
+          ).length === 0 ? ( //if lenght of that array (after filtering) is 0, then show message
+            <div className='text-center text-neutral-500 text-lg whitespace-nowrap'>
+              {activeView === 'bookmarks' ? 'No Bookmarked Images Yet' : 'No Generated Images Yet'}
+            </div>
+          ) :  //else display images 
+            (
+              (activeView === 'bookmarks' //filter or not for displaying images
+                ? imagesData.filter(image => image.bookmark === true)
+                : imagesData
+              ).map((image, index) => (
+                <div onClick={() => {
+                  setShowImageBox(true);
+                  setImageData(image);
+                }} key={index} className='md:aspect-square md:border-2 md:border-neutral-700 overflow-hidden cursor-pointer'>
+                  <img src={image.url} alt="" className='object-contain w-full h-full' />
+                </div>
+              ))
+            ))
+        }
       </div>
     </div>
   )

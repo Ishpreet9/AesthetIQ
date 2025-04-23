@@ -81,8 +81,8 @@ const Generate = () => {
           }
         </div>
         {/* all generations button */}
-        <Link to={'/all-generations'} className='flex items-center gap-4 bg-neutral-700 text-neutral-300 text-[1.1vw] px-[2vw] py-[1.2vh] cursor-pointer border-2 border-transparent hover:border-neutral-300 transition-all duration-500'>
-          <img src={assets.menu} alt="" className='w-[1.8vw] invert opacity-70'/>
+        <Link to={'/all-generations'} className='flex items-center gap-4 bg-neutral-700 text-neutral-300 md:text-[1.1vw] md:px-[2vw] px-3 py-[1.2vh] cursor-pointer border-2 border-transparent hover:border-neutral-300 transition-all duration-500'>
+          <img src={assets.menu} alt="" className='md:w-[1.8vw] w-6 invert opacity-70'/>
           <span>
           VIEW ALL GENERATIONS
           </span>

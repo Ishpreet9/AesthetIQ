@@ -106,7 +106,7 @@ const imageBox = ({setShowImageBox, page}) => {
     }
 
   return (
-    <div className='fixed z-20 bg-black text-white w-[95vw] h-[96vh] flex flex-col justify-between md:mb-14 mb-4'>
+    <div className='fixed z-20 bg-black text-white w-[95vw] md:h-[96vh] h-[97vh] flex flex-col justify-between md:mb-14 mb-20'>
       {/* top section */}
       <div className='flex items-center justify-between bg-neutral-900 w-full h-[6vh] md:px-10 px-4'>
       {/* image details */}

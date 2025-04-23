@@ -10,7 +10,7 @@ const AllGenerations = () => {
   return (
     <div className='flex flex-col items-center justify-center'>
       {showImageBox ? <ImageBox setShowImageBox={setShowImageBox} page={'all-generations'}/> : <div className='hidden'></div>}
-    <div className='grid grid-cols-[10vw_1fr] px-[5vw]'>
+    <div className='md:grid md:grid-cols-[10vw_1fr] flex flex-col px-[5vw]'>
       <Sidebar activeView={activeView} setActiveView={setActiveView}/>
       <GeneratedImages setShowImageBox={setShowImageBox} activeView={activeView} />
     </div>
