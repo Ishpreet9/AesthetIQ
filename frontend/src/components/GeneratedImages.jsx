@@ -51,7 +51,7 @@ const GeneratedImages = ({ setShowImageBox, activeView }) => {
                 <div onClick={() => {
                   setShowImageBox(true);
                   setImageData(image);
-                }} key={index} className='md:aspect-square md:border-2 md:border-neutral-700 overflow-hidden cursor-pointer'>
+                }} key={index} className='md:aspect-square md:border-2 md:border-neutral-700/30 overflow-hidden cursor-pointer'>
                   <img src={image.url} alt="" className='object-contain w-full h-full' />
                 </div>
               ))
