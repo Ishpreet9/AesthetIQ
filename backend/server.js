@@ -4,6 +4,7 @@ import cors from 'cors';
 import connectDB from './config/mongodb.js';
 import userRoutes from './routes/userRoutes.js'
 import imageRouter from './routes/imageRoutes.js';
+import promptRoutes from './routes/promptRoutes.js';
 import cookieParser from 'cookie-parser';
 
 connectDB();
@@ -16,6 +17,7 @@ app.use(cors({
 }));
 app.use(cookieParser());
 app.use(express.json());
+app.use('/api/prompt',promptRoutes);
 app.use('/api/user',userRoutes);
 app.use('/api/image',imageRouter);
 

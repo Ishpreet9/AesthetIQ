@@ -13,6 +13,8 @@ const Generate = () => {
   const [prompt, setPrompt] = useState('');
   const [style, setStyle] = useState('');
   const [isLoading, setIsLoading] = useState(false);
+  const [promptEnhanceLoading,setPromptEnhanceLoading] = useState(false);
+  const [randomPromptLoading,setRandomPromptLoading] = useState(false);
   const [showStyles, setShowStyles] = useState(false);
   const [aspectRatio, setAspectRatio] = useState('1:1');
   const [imageRatio, setImageRatio] = useState('');
@@ -48,6 +50,40 @@ const Generate = () => {
       console.log(error);
     } finally {
       setIsLoading(false);
+    }
+  }
+
+  const enhancePrompt = async () => {
+    try {
+      if (!prompt.trim()) {
+        toast.error('Prompt is empty!');
+        return;
+      }
+      setPromptEnhanceLoading(true);
+      const response = await axios.post(backendUrl+'/api/prompt/enhance-prompt',{prompt},{withCredentials:true});
+      if(response.data.success)
+      {
+        setPrompt(response.data.enhancedPrompt);
+        setPromptEnhanceLoading(false);
+        toast.success('Prompt Enhanced Successfully');
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  const getRandomPrompt = async () => {
+    try {
+      setRandomPromptLoading(true);
+      const response = await axios.post(backendUrl+'/api/prompt/random-prompt',{},{withCredentials:true});
+      if(response.data.success)
+      {
+        setPrompt(response.data.generatedPrompt);
+        setRandomPromptLoading(false);
+        toast.success('Random Prompt Generated');
+      }
+    } catch (error) {
+      console.log(error);
     }
   }
 
@@ -88,8 +124,29 @@ const Generate = () => {
           </span>
         </Link>
         <form onSubmit={onSubmitHandler} action="" className='flex md:flex-row flex-col items-start gap-5 items-center min-h-[160px]'>
+          <div className='relative'>
+            {/* enhance prompt and random prompt button */}
+          <div className='absolute flex gap-[1vw] bottom-[14.4vw]'>
+          <button onClick={()=>enhancePrompt()} type='button' className='group flex items-center justify-center gap-[1vw] bg-black pl-[0.8vw] py-[0.8vw] bg-neutral-900 border-3 border-black rounded-md cursor-pointer hover:border-neutral-400'>
+            {promptEnhanceLoading ? 
+            <div className='w-[2vw] h-[2vw] border-3 border-neutral-400 rounded-full border-t-blue-400 animate-spin'></div>
+            :
+            <img src={assets.wand} alt="" className='invert w-[2vw] opacity-80' />
+             }
+            <p className='whitespace-nowrap text-neutral-200 max-w-0 overflow-hidden group-hover:max-w-[10vw] group-hover:mr-[0.8vw] transition-all duration-500'>Enhance Prompt</p>
+          </button>
+          <button onClick={()=>getRandomPrompt()} type='button' className='group flex items-center justify-center gap-[1vw] bg-black pl-[0.8vw] py-[0.8vw] bg-neutral-900 border-3 border-black rounded-md cursor-pointer hover:border-neutral-400'>
+            {randomPromptLoading ? 
+            <div className='w-[2vw] h-[2vw] border-3 border-neutral-400 rounded-full border-t-blue-400 animate-spin'></div>
+            :
+            <img src={assets.dice} alt="" className='invert w-[2vw] opacity-80' />
+            }
+            <p className='whitespace-nowrap text-neutral-200 max-w-0 overflow-hidden group-hover:max-w-[10vw] group-hover:mr-[0.8vw] transition-all duration-500'>Random Prompt</p>
+          </button>
+          </div>
           {/* prompt box */}
           <textarea onChange={(e) => setPrompt(e.target.value)} value={prompt} placeholder='Enter prompt...' name="" id="" className='bg-neutral-900 text-white md:w-[47vw] w-90 md:h-[13vw] h-40 border-3 border-black rounded-xl p-2 md:text-[1.7vw] text-xl overflow-y-scroll resize-none opacity-75 focus:outline-none custom-scroll'></textarea>
+          </div>
           {/* generate and style button  */}
           <div className='flex md:flex-col flex-row gap-4 md:h-[11vw] md:gap-[2.2vw] h-[60px] justify-between relative'>
             <button type='submit' className='bg-neutral-900 md:text-[1.4vw] text-neutral-200 px-10 md:py-[2.7vh] py-4 rounded-xl border-3 border-black cursor-pointer hover:border-neutral-200 transition-all duration-500 font-semibold'>

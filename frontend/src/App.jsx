@@ -41,7 +41,7 @@ const App = () => {
 
   return (
     <div className='min-h-screen'>
-      <ToastContainer theme='dark' position='bottom-left'/>
+      <ToastContainer theme='dark' position='top-left'/>
       <RouterProvider router={router} />
     </div>
   )

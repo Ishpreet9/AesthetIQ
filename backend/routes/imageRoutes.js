@@ -9,4 +9,4 @@ router.post('/get-all-images',authMiddleware,getAllImages);
 router.post('/add-bookmark',authMiddleware,addBookmark);
 router.post('/remove-bookmark',authMiddleware,removeBookmark);
 
-export default router
+export default router;
