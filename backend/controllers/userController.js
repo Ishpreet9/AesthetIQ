@@ -106,4 +106,24 @@ const userCredits = async (req,res) => {
     }
 }
 
-export {registerUser,loginUser,logoutUser,userCredits};
+const resetCredits = async (req,res) => {
+    try {
+        const userId = req.userId;
+        if(!userId)
+        {
+            return res.status(400).json({success:false,message:'Unable to retrieve user information'});
+        }
+        const user = await userModel.findById(userId);
+        if(!user)
+        {
+            return res.status(404).json({success:false,message:'User not found'});
+        }
+        user.creditBalance = 5;
+        await user.save();
+        return res.status(200).json({success:true,message:'User credits reset to default'});
+    } catch (error) {
+        return res.status(500).json({success:false,message:error.message});
+    }
+}
+
+export {registerUser,loginUser,logoutUser,userCredits,resetCredits};

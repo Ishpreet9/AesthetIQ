@@ -32,6 +32,8 @@ import grid_empty from './grid_empty.png';
 import grid_filled from './grid_filled.png';
 import copy from './copy.png';
 import dice from './dice.png';
+import construction from './construction.png'
+import reset from './reset.png'
 
 export const assets = {
     logo,
@@ -67,5 +69,7 @@ export const assets = {
     grid_empty,
     grid_filled,
     copy,
-    dice
+    dice,
+    construction,
+    reset
 }
