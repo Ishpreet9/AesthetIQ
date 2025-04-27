@@ -14,7 +14,6 @@ const BuyCredits = () => {
       if(credits === 5)
       {
         toast.error('User credits already at default value')
-        return;
       }
       const response = await axios.post(backendUrl+'/api/user/reset-credits',{},{withCredentials:true});
       if(response.data.success)
@@ -26,7 +25,10 @@ const BuyCredits = () => {
         toast.error('Unable to reset credits');
         console.log(error);
       }
+      
+
     } catch (error) {
+      toast.error('Unable to reset credits');
       console.log(error);
     }
   }

@@ -149,7 +149,7 @@ const Generate = () => {
           </div>
           {/* generate and style button  */}
           <div className='flex md:flex-col flex-row gap-4 md:h-[11vw] md:gap-[2.2vw] h-[60px] justify-between relative'>
-            <button type='submit' className='bg-neutral-900 md:text-[1.4vw] text-neutral-200 px-10 md:py-[2.7vh] py-4 rounded-xl border-3 border-black cursor-pointer hover:border-neutral-200 transition-all duration-500 font-semibold'>
+            <button type='submit' className='bg-neutral-900 md:text-[1.4vw] text-neutral-200 px-10 md:py-[2.7vh] py-4 rounded-xl border-3 border-black cursor-pointer hover:border-black hover:bg-neutral-300 hover:text-black hover:font-bold transition-all duration-500 font-semibold'>
               GENERATE
             </button>
             <div className='group'>
