@@ -5,6 +5,7 @@ import connectDB from './config/mongodb.js';
 import userRoutes from './routes/userRoutes.js'
 import imageRouter from './routes/imageRoutes.js';
 import promptRoutes from './routes/promptRoutes.js';
+import mailRoutes from './routes/mailRoutes.js';
 import cookieParser from 'cookie-parser';
 
 connectDB();
@@ -20,6 +21,7 @@ app.use(express.json());
 app.use('/api/prompt',promptRoutes);
 app.use('/api/user',userRoutes);
 app.use('/api/image',imageRouter);
+app.use('/api/mailer/',mailRoutes);
 
 app.get('/',(req,res)=>res.send("API Working"))
 
