@@ -3,6 +3,7 @@ import axios from 'axios';
 import { AppContext } from '../context/AppContext';
 import { toast } from 'react-toastify';
 import OtpInput from '../components/OtpInput';
+import { useNavigate } from 'react-router-dom';
 
 const Login = () => {
 
@@ -13,13 +14,16 @@ const Login = () => {
   const [password, setPassword] = useState('');
   const [enterOtp,setEnterOtp] = useState(false);
   const [otpArr, setOtpArr] = useState(Array(6).fill(''));
-
+  const [isOtpLoading,setIsOtpLoading] = useState(false);
+  const navigate = useNavigate();
+  
 
   const onSubmitHandler = async (e) => {
       e.preventDefault();
       //register user, first send otp to verify
       if (!signedUp) {
         try {
+          setIsOtpLoading(true);
           //sending otp to email
           const response = await axios.post(backendUrl+'/api/mailer/send-otp',{ userEmail:email });
           if(response.data.success)
@@ -35,6 +39,8 @@ const Login = () => {
         } catch (error) {
           toast.error('Error signing up user!');
           console.log(error);  
+        } finally {
+          setIsOtpLoading(false);
         }
       } 
       //else login user 
@@ -47,12 +53,13 @@ const Login = () => {
     try {
         const response = await axios.post(backendUrl + '/api/user/register', { name, email, password });
         if (response.data.success) {
-          toast.success("User Registered Successfully");
+          toast.success("User Registered Successfully. Login To Continue !");
           console.log("User Registered Successfully");
           setName('');
           setEmail('');
           setPassword('');
           setSignedUp(true);
+          navigate('/');
         }
         else {
           toast.error("User Not Registered!")
@@ -117,10 +124,27 @@ const Login = () => {
       <div className='bg-neutral-500/13 border-3 border-neutral-500/60 md:mt-[5vw] mt-25 md:px-[3vw] px-5 md:py-[2vw] py-5 flex flex-col justify-center items-center rounded-lg'>
         <h1 className='text-neutral-200 md:text-[2.7vw] text-4xl font-bold'>{signedUp ? 'LOGIN' : 'SIGN UP'}</h1>
         <form onSubmit={onSubmitHandler} action="" className='flex flex-col md:gap-[1.5vw] gap-5 md:mt-[1.5vw] mt-5 justify-center items-center'>
-          {signedUp || <input onChange={(e) => setName(e.target.value)} value={name} type="text" className='bg-black/40 border-2 border-black text-neutral-300 md:pl-[1.7vw] pl-5 pr-20 md:py-[1.2vw] py-4 rounded-md md:text-[1.5vw] text-lg outline-none focus:border-neutral-500 transition-all duration-500' placeholder='Enter username' />}
-          <input type="email" onChange={(e) => setEmail(e.target.value)} value={email} className='bg-black/40 border-2 border-black text-neutral-300 md:pl-[1.7vw] pl-5 pr-20 md:py-[1.2vw] py-4 rounded-md md:text-[1.5vw] text-lg outline-none focus:border-neutral-500 transition-all duration-500' placeholder='Enter email' />
-          <input type="password" onChange={(e) => setPassword(e.target.value)} value={password} className='bg-black/40 border-2 border-black text-neutral-300 md:pl-[1.7vw] pl-5 pr-20 md:py-[1.2vw] py-4 rounded-md md:text-[1.5vw] text-lg outline-none focus:border-neutral-500 transition-all duration-500' placeholder='Enter password' />
-          <input type="submit" className='bg-neutral-200 text-black md:text-[1.6vw] text-2xl font-semibold md:px-[2vw] px-6 md:py-[0.8vw] py-2 rounded-md cursor-pointer border-2 border-neutral-900 hover:bg-black/40 hover:border-neutral-400/90 hover:text-neutral-200 transition-all duration-500' value={signedUp ? 'LOGIN' : 'SIGN UP'} />
+          {signedUp || <input onChange={(e) => setName(e.target.value)} value={name} type="text" className='bg-black/40 border-2 border-black text-neutral-300 md:px-[1.7vw] md:w-[23.5vw] pl-5 md:py-[1.2vw] py-4 rounded-md md:text-[1.5vw] text-lg outline-none focus:border-neutral-500 transition-all duration-500' placeholder='Enter username' />}
+          <input type="email" onChange={(e) => setEmail(e.target.value)} value={email} className='bg-black/40 border-2 border-black text-neutral-300 md:px-[1.7vw] md:w-[23.5vw] pl-5 md:py-[1.2vw] py-4 rounded-md md:text-[1.5vw] text-lg outline-none focus:border-neutral-500 transition-all duration-500' placeholder='Enter email' />
+          <input type="password" onChange={(e) => setPassword(e.target.value)} value={password} className='bg-black/40 border-2 border-black text-neutral-300 md:px-[1.7vw] md:w-[23.5vw] pl-5 md:py-[1.2vw] py-4 rounded-md md:text-[1.5vw] text-lg outline-none focus:border-neutral-500 transition-all duration-500' placeholder='Enter password' />
+          {signedUp
+          ?
+          <button type="submit" className='bg-neutral-200 text-black md:text-[1.6vw] text-2xl font-semibold md:px-[2vw] px-6 md:py-[0.8vw] py-2 rounded-md cursor-pointer border-2 border-neutral-900 hover:bg-black/40 hover:border-neutral-400/90 hover:text-neutral-200 transition-all duration-500'>
+            Login
+          </button>  
+          :
+          <button type="submit" className='bg-neutral-200 text-black md:text-[1.6vw] text-2xl font-semibold md:px-[2vw] px-6 md:py-[0.8vw] py-2 rounded-md cursor-pointer border-2 border-neutral-900 hover:bg-black/40 hover:border-neutral-400/90 hover:text-neutral-200 transition-all duration-500'>
+            {isOtpLoading 
+            ? 
+            <div className='flex gap-[1vw]'>
+              <p>Sending OTP</p>
+              <div className='w-[2vw] h-[2vw] border-3 border-neutral-400 rounded-full border-t-blue-600 animate-spin'></div>
+            </div>
+            :
+            <p>Sign Up</p>
+          }
+          </button>
+          }
         </form>
       </div>
       <p className='text-blue-400 mt-2 opacity-90 cursor-pointer' onClick={() => setSignedUp(!signedUp)}>{signedUp ? 'No account ? Sign up to continue' : 'Alerady signed up ? Login to continue...'}</p>
