@@ -1,6 +1,7 @@
 import nodemailer from 'nodemailer'
 import crypto from 'crypto'
 import otpModel from '../models/otpModel.js';
+import userModel from "../models/userModel.js";
 
 const transporter = nodemailer.createTransport({
     service: 'gmail',
@@ -26,7 +27,14 @@ const sendOtpEmail = async (userEmail, otp) => {
         </div>
         </div>` 
     }
-    await transporter.sendMail(mailOptions);
+    try {
+        await transporter.sendMail(mailOptions);
+        console.log('OTP sent successfully to : ', userEmail)
+        return true;
+    } catch (error) {
+        console.error('Error sending otp : ',error);
+        return false
+    }
 };
 
 const generateOtp = () => {
@@ -37,8 +45,29 @@ const generateOtp = () => {
 const sendOtp = async (req, res) => {
     try {
         const { userEmail } = req.body;
+        //check if user is already registered or not 
         if (!userEmail) {
-            res.status(400).json({ success: false, message: 'User email not provided' });
+            return res.status(400).json({success: false, message: 'User email not provided'});
+        }
+        const user = await userModel.findOne({email: userEmail});
+        if(user)
+        {
+            return res.status(400).json({success:false,message:'User already signed up!'});
+        }
+
+        //check if previous email exist and not expired
+        const previousOtpData = await otpModel.findOne({email: userEmail});
+        if(previousOtpData)
+        {
+            //if previous otp exist and not expired then send error 
+            if(previousOtpData.expiresAt > new Date())
+            {
+                return res.status(400).json({success:false, message: 'Previous otp not expired! Try after some time!'})
+            }
+            else  //if expired and still exist in database, then delete it
+            {
+                await otpModel.deleteMany({email: userEmail});
+            }
         }
         //generate otp 
         let otp = generateOtp();
@@ -48,14 +77,17 @@ const sendOtp = async (req, res) => {
             otp: otp,
         });
         await otpData.save();
-
         //send otp via email 
-        await sendOtpEmail(userEmail, otp);
-        res.status(200).json({ success: true, message: 'OTP sent successfully' });
+        const emailSent = await sendOtpEmail(userEmail, otp);
+        if(!emailSent)
+        {
+            return res.status(500).json({success:false, message: 'Failed to send otp!'});
+        }
+        return res.status(200).json({ success: true, message: 'OTP sent successfully' });
 
     } catch (error) {
         console.error('Error sending OTP:', error);
-        res.status(500).json({ success: false, message: 'Failed to send OTP', error: error.message });
+        return res.status(500).json({ success: false, message: 'Failed to send OTP', error: error.message });
     }
 }
 
@@ -67,9 +99,9 @@ const verifyOtp = async (req,res) => {
         {
             return res.status(400).json({success:false,message:'Otp not available or expired!'});
         }
-        if(Date.now()>otpData.expiresAt)
+        if(new Date() > otpData.expiresAt)
         {
-            return res.status(400).json({success:false,message:'Otp expired'});
+            return res.status(400).json({success:false,message:'Otp expired!'});
         }
         if(otpData.otp === otp)
         {
