@@ -37,8 +37,6 @@ const generateImage = async (req,res) => {
             return res.status(403).json({success:false, message: 'Not enough credits', creditBalance: user.creditBalance});
           }
 
-          console.log(finalPrompt);
-
           const response = await axios.postForm(
             'https://api.stability.ai/v2beta/stable-image/generate/ultra',
             {

@@ -88,8 +88,6 @@ const logoutUser = async (req,res) => {
 
 const userCredits = async (req,res) => {
     try {
-        console.log(req.user);
-        console.log(req.body);
         const userId = req.userId;
         if(!userId)
         {
