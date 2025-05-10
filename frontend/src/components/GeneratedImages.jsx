@@ -24,12 +24,7 @@ const GeneratedImages = ({ setShowImageBox, activeView }) => {
 
   useEffect(() => {
     getImagesData();
-    console.log('Bookmark changed')
   }, [bookmarkChange]);
-
-  useEffect(() => {
-    console.log(imagesData);
-  }, [imagesData]);
 
   return (
     <div className='p-[1vw]'>

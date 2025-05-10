@@ -126,26 +126,26 @@ const Generate = () => {
         <form onSubmit={onSubmitHandler} action="" className='flex md:flex-row flex-col items-start gap-5 items-center min-h-[160px]'>
           <div className='relative'>
             {/* enhance prompt and random prompt button */}
-          <div className='absolute flex gap-[1vw] bottom-[14.4vw]'>
-          <button onClick={()=>enhancePrompt()} type='button' className='group flex items-center justify-center gap-[1vw] bg-black pl-[0.8vw] py-[0.8vw] bg-neutral-900 border-3 border-black rounded-md cursor-pointer hover:border-neutral-400'>
+          <div className='absolute flex flex-row md:gap-[1vw] gap-2 md:bottom-[14.4vw] bottom-4 md:left-0 left-57 z-10'>
+          <button onClick={()=>enhancePrompt()} type='button' className='group flex items-center justify-center gap-[1vw] md:pl-[0.8vw] md:px-0 pr-2 pl-3 md:py-[0.8vw] py-2 md:bg-neutral-900 bg-neutral-900 border-3 border-black rounded-md cursor-pointer hover:border-neutral-400'>
             {promptEnhanceLoading ? 
-            <div className='w-[2vw] h-[2vw] border-3 border-neutral-400 rounded-full border-t-blue-400 animate-spin'></div>
+            <div className='md:w-[2vw] w-7 h-7 md:h-[2vw] md:border-3 border-4 border-neutral-400 rounded-full border-t-blue-400 animate-spin'></div>
             :
-            <img src={assets.feather} alt="" className='invert w-[2vw] opacity-80' />
+            <img src={assets.feather} alt="" className='invert md:w-[2vw] w-7 opacity-80' />
              }
             <p className='whitespace-nowrap text-neutral-200 max-w-0 overflow-hidden group-hover:max-w-[10vw] group-hover:mr-[0.8vw] transition-all duration-500'>Enhance Prompt</p>
           </button>
-          <button onClick={()=>getRandomPrompt()} type='button' className='group flex items-center justify-center gap-[1vw] bg-black pl-[0.8vw] py-[0.8vw] bg-neutral-900 border-3 border-black rounded-md cursor-pointer hover:border-neutral-400'>
+          <button onClick={()=>getRandomPrompt()} type='button' className='group flex items-center justify-center gap-[1vw] md:pl-[0.8vw] md:px-0 pr-2 pl-3 md:py-[0.8vw] py-2 md:bg-neutral-900 bg-neutral-900 border-3 border-black rounded-md cursor-pointer hover:border-neutral-400'>
             {randomPromptLoading ? 
-            <div className='w-[2vw] h-[2vw] border-3 border-neutral-400 rounded-full border-t-blue-400 animate-spin'></div>
+            <div className='md:w-[2vw] md:h-[2vw] w-7 h-7 md:border-3 border-4 border-neutral-400 rounded-full border-t-blue-400 animate-spin'></div>
             :
-            <img src={assets.dice} alt="" className='invert w-[2vw] opacity-80' />
+            <img src={assets.dice} alt="" className='invert md:w-[2vw] w-7 opacity-80' />
             }
             <p className='whitespace-nowrap text-neutral-200 max-w-0 overflow-hidden group-hover:max-w-[10vw] group-hover:mr-[0.8vw] transition-all duration-500'>Random Prompt</p>
           </button>
           </div>
           {/* prompt box */}
-          <textarea onChange={(e) => setPrompt(e.target.value)} value={prompt} placeholder='Enter prompt...' name="" id="" className='bg-neutral-900 text-white md:w-[47vw] w-90 md:h-[13vw] h-40 border-3 border-black rounded-xl p-2 md:text-[1.7vw] text-xl overflow-y-scroll resize-none opacity-75 focus:outline-none custom-scroll'></textarea>
+          <textarea onChange={(e) => setPrompt(e.target.value)} value={prompt} placeholder='Enter prompt...' name="" id="" className='bg-neutral-900 text-white md:w-[47vw] w-90 md:h-[13vw] h-43 border-3 border-black rounded-xl p-2 md:text-[1.7vw] text-xl overflow-y-scroll resize-none opacity-75 focus:outline-none custom-scroll'></textarea>
           </div>
           {/* generate and style button  */}
           <div className='flex md:flex-col flex-row gap-4 md:h-[11vw] md:gap-[2.2vw] h-[60px] justify-between relative'>

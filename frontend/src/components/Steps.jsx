@@ -29,8 +29,8 @@ const Steps = () => {
             <h2 className="md:text-[4vw] text-5xl font-bold text-neutral-200 mb-4">
               Create with Confidence
             </h2>
-            <p className="text-md text-neutral-400 bg-neutral-700 inline-flex px-6 py-1 rounded-full">
-              "Three simple steps from concept to breathtaking reality"
+            <p className="text-md text-neutral-400 bg-neutral-700 inline-flex md:px-6 px-3 py-1 rounded-md">
+              "Three simple steps from concept to reality"
             </p>
           </div>
     

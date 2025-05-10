@@ -108,20 +108,20 @@ const imageBox = ({setShowImageBox, page}) => {
   return (
     <div className='fixed z-20 bg-black text-white w-[95vw] md:h-[96vh] h-[97vh] flex flex-col justify-between md:mb-14 mb-20'>
       {/* top section */}
-      <div className='flex items-center justify-between bg-neutral-900 w-full h-[6vh] md:px-10 px-4'>
+      <div className='flex items-center justify-between bg-neutral-900 w-full h-[6vh] md:px-[1vw] px-[2.2vw]'>
       {/* image details */}
-      <div className='flex gap-[1vw]'>
+      <div className='flex md:gap-[1vw] gap-2'>
 
-        <div className='flex gap-[0.5vw] bg-neutral-800 px-[1vw] items-center rounded-sm'>
-          <button className='border-[0.1vw] border-neutral-500 p-[0.2vw] rounded-sm cursor-pointer'>
-          <img src={assets.copy} alt="" className='w-[1.1vw] h-[2.3vh] invert opacity-70'/>
+        <div className='flex gap-[0.5vw] bg-neutral-800 px-[0.7vw] items-center rounded-sm'>
+          <button className='md:border-[0.1vw] border-neutral-500 p-[0.2vw] rounded-sm cursor-pointer'>
+          <img src={assets.copy} alt="" className='md:w-[1.1vw] h-[2.3vh] invert opacity-70'/>
           </button>
           <p className='text-neutral-300 whitespace-nowrap overflow-scroll custom-scroll max-w-[50vw]'>{imageData.prompt}</p>
         </div>
-        <div className='bg-neutral-800 px-[1vw] rounded-sm text-neutral-300'>
+        <div className='bg-neutral-800 px-[0.7vw] rounded-sm text-neutral-300'>
           <p>{imageData.style === 'anime' ? 'Anime' : imageData.style === 'ghibli' ? 'Ghibli' : imageData.style === 'realistic' ? 'Realistic' : imageData.style === 'logo' ? 'Logo' : 'None'}</p>
         </div>
-        <div className='bg-neutral-800 px-[1vw] rounded-sm text-neutral-300'>
+        <div className='bg-neutral-800 px-[0.7vw] rounded-sm text-neutral-300'>
           <p>{imageData.ratio === '1:1' ? '1:1' : imageData.ratio === '16:9' ? '16:9' : imageData.ratio === '2:3' ? '2:3' : 'err'}</p>
         </div>
       </div>
