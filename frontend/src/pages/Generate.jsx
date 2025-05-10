@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react'
+import React, { useContext, useEffect, useRef, useState } from 'react'
 import { assets } from '../assets/assets'
 import axios from 'axios';
 import { AppContext } from '../context/AppContext';
@@ -19,6 +19,7 @@ const Generate = () => {
   const [aspectRatio, setAspectRatio] = useState('1:1');
   const [imageRatio, setImageRatio] = useState('');
   const [showImageBox, setShowImageBox] = useState(false);
+  const styleBoxRef = useRef(null);
 
   const onSubmitHandler = async (e) => {
     e.preventDefault();
@@ -91,6 +92,23 @@ const Generate = () => {
     setImageRatio('1:1');
   }, []);
 
+  useEffect(() => {
+  const handleClickOutside = (event) => {
+    if (styleBoxRef.current && !styleBoxRef.current.contains(event.target)) {
+      setShowStyles(false);
+    }
+  };
+
+  if (showStyles) {
+    document.addEventListener('mousedown', handleClickOutside);
+  }
+
+  return () => {
+    document.removeEventListener('mousedown', handleClickOutside);
+  };
+}, [showStyles]);
+
+
   return (
     <div className='flex flex-col items-center justify-center'>
       {showImageBox ? <ImageBox setShowImageBox={setShowImageBox} page={'generate'}/> : <div className='hidden'></div>}
@@ -152,21 +170,31 @@ const Generate = () => {
             <button type='submit' className='bg-neutral-900 md:text-[1.4vw] text-neutral-200 px-10 md:py-[2.7vh] py-4 rounded-xl border-3 border-black cursor-pointer hover:border-black hover:bg-neutral-300 hover:text-black hover:font-bold transition-all duration-500 font-semibold'>
               GENERATE
             </button>
-            <div className='group'>
+            <div className='group' ref={styleBoxRef}>
               <button type='button' onClick={() => setShowStyles(!showStyles)} className='relative z-0 md:text-[1.4vw] bg-neutral-900 text-neutral-200 px-10 md:py-[2.7vh] py-4 rounded-xl border-3 border-black cursor-pointer hover:border-neutral-200 transition-all duration-500 font-semibold min-w-44'>
                 {style && <img src={style === 'anime' ? assets.anime_image : style === 'ghibli' ? assets.ghibli_image : style === 'realistic' ? assets.realistic_image : style === 'logo' ? assets.logo_image : ''} alt="" className='absolute h-full w-full object-cover rounded-xl bottom-0 left-0 opacity-70 z-0' />}
                 <div className='relative z-10'>
                   <span>{style === 'anime' ? 'Anime' : style === 'ghibli' ? 'Ghibli-Style' : style === 'realistic' ? 'Realistic' : style === 'logo' ? 'Logo' : 'Style (None)'}</span>
                 </div>
+                {
+                style && 
+                <div onClick={(e)=>
+                {
+                  e.stopPropagation();
+                  setStyle('');
+                }} className='absolute md:bottom-[2.5vh] bottom-3 left-32 md:left-[11vw] md:p-[0.3vw] p-[1.3vw] bg-neutral-300/30 rounded border-2 border-black group/cross hover:bg-neutral-600/30 hover:invert'>
+                  <img src={assets.cross} alt="" className='md:w-[1.3vw] w-5' />
+                </div>
+                }
               </button>
-              <div className={`bg-neutral-900/60 md:w-[30vw] md:h-[30vh] w-80 h-44 absolute md:bottom-[3vw] md:left-7 left-14 bottom-15 grid grid-cols-2 grid-rows-2 gap-4 p-4 rounded-xl ${showStyles ? 'grid' : 'hidden'} md:hidden md:group-hover:grid`}>
+              <div className={`bg-neutral-900/60 z-20 md:w-[30vw] md:h-[30vh] w-80 h-44 absolute md:bottom-[4vw] md:left-7 left-14 bottom-15 grid grid-cols-2 grid-rows-2 gap-4 p-4 rounded-xl ${showStyles ? 'grid' : 'hidden'}`}>
                 <button type='button' onClick={() => { setStyle('anime'); setShowStyles(false); }} className='bg-neutral-900 rounded-xl border-3 border-black cursor-pointer relative hover:border-neutral-400 text-neutral-100 flex justify-center items-center text-center text-xl font-semibold'>
                   <img src={assets.anime_image} alt="" className='absolute w-full h-full object-cover rounded-xl opacity-70' />
                   <span className='z-10'>Anime</span>
                 </button>
                 <button type='button' onClick={() => { setStyle('ghibli'); setShowStyles(false); }} className='bg-neutral-900 rounded-xl border-3 border-black cursor-pointer relative hover:border-neutral-400 text-neutral-200 flex justify-center items-center text-center text-xl font-semibold'>
                   <img src={assets.ghibli_image} alt="" className='absolute w-full h-full object-cover rounded-xl opacity-70' />
-                  <span className='z-10'>Ghibli-Style</span>
+                  <span className='z-10'>Ghibli</span>
                 </button>
                 <button type='button' onClick={() => { setStyle('realistic'); setShowStyles(false); }} className='bg-neutral-900 rounded-xl border-3 border-black cursor-pointer relative hover:border-neutral-400 text-neutral-200 flex justify-center items-center text-center text-xl font-semibold'>
                   <img src={assets.realistic_image} alt="" className='absolute w-full h-full object-cover rounded-xl opacity-70' />
