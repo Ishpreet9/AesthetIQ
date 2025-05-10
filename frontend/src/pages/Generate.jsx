@@ -131,7 +131,7 @@ const Generate = () => {
             {promptEnhanceLoading ? 
             <div className='w-[2vw] h-[2vw] border-3 border-neutral-400 rounded-full border-t-blue-400 animate-spin'></div>
             :
-            <img src={assets.wand} alt="" className='invert w-[2vw] opacity-80' />
+            <img src={assets.feather} alt="" className='invert w-[2vw] opacity-80' />
              }
             <p className='whitespace-nowrap text-neutral-200 max-w-0 overflow-hidden group-hover:max-w-[10vw] group-hover:mr-[0.8vw] transition-all duration-500'>Enhance Prompt</p>
           </button>

@@ -80,6 +80,7 @@ const Login = () => {
         setUser(response.data.username);
         setEmail('');
         setPassword('');
+        navigate('/');
       }
     } catch (error) {
       toast.error("Invalid Email Or Password");
@@ -129,11 +130,11 @@ const Login = () => {
           <input type="password" onChange={(e) => setPassword(e.target.value)} value={password} className='bg-black/40 border-2 border-black text-neutral-300 md:px-[1.7vw] md:w-[23.5vw] pl-5 md:py-[1.2vw] py-4 rounded-md md:text-[1.5vw] text-lg outline-none focus:border-neutral-500 transition-all duration-500' placeholder='Enter password' />
           {signedUp
           ?
-          <button type="submit" className='bg-neutral-200 text-black md:text-[1.6vw] text-2xl font-semibold md:px-[2vw] px-6 md:py-[0.8vw] py-2 rounded-md cursor-pointer border-2 border-neutral-900 hover:bg-black/40 hover:border-neutral-400/90 hover:text-neutral-200 transition-all duration-500'>
+          <button type="submit" className='bg-neutral-200 text-black md:text-[1.6vw] text-2xl font-semibold md:px-[2vw] px-6 md:py-[0.8vw] py-2 rounded-md cursor-pointer border-2 border-neutral-900 hover:bg-black/40 hover:border-neutral-400/90 hover:text-neutral-200 transition-all duration-400'>
             Login
           </button>  
           :
-          <button type="submit" className='bg-neutral-200 text-black md:text-[1.6vw] text-2xl font-semibold md:px-[2vw] px-6 md:py-[0.8vw] py-2 rounded-md cursor-pointer border-2 border-neutral-900 hover:bg-black/40 hover:border-neutral-400/90 hover:text-neutral-200 transition-all duration-500'>
+          <button type="submit" className='bg-neutral-200 text-black md:text-[1.6vw] text-2xl font-semibold md:px-[2vw] px-6 md:py-[0.8vw] py-2 rounded-md cursor-pointer border-2 border-neutral-900 hover:bg-black/40 hover:border-neutral-400/90 hover:text-neutral-200 transition-all duration-400'>
             {isOtpLoading 
             ? 
             <div className='flex gap-[1vw]'>

@@ -1,5 +1,4 @@
 import logo from './logo.png';
-import star from './star.png';
 import profile from './profile.png';
 import magic_wand from './magic_wand.png';
 import sample_image_1 from './sample_image_1.jpg';
@@ -32,12 +31,13 @@ import grid_empty from './grid_empty.png';
 import grid_filled from './grid_filled.png';
 import copy from './copy.png';
 import dice from './dice.png';
-import construction from './construction.png'
-import reset from './reset.png'
+import construction from './construction.png';
+import reset from './reset.png';
+import flame from './flame4.png';
+import feather from './feather2.png';
 
 export const assets = {
     logo,
-    star,
     profile,
     magic_wand,
     sample_image_1,
@@ -71,5 +71,7 @@ export const assets = {
     copy,
     dice,
     construction,
-    reset
+    reset,
+    flame,
+    feather
 }
