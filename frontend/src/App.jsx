@@ -4,6 +4,7 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import BuyCredits from './pages/BuyCredits';
 import Generate from './pages/Generate';
+import Profile from './pages/Profile';
 import Login from './pages/Login';
 import { ToastContainer } from 'react-toastify';
 import AllGenerations from './pages/AllGenerations';
@@ -34,6 +35,10 @@ const App = () => {
         {
           path: "/all-generations",
           element: <AllGenerations />
+        },
+        {
+          path: "/profile",
+          element: <Profile/>
         }
       ]
     }

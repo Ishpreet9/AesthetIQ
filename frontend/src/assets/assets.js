@@ -35,6 +35,7 @@ import construction from './construction.png';
 import reset from './reset.png';
 import flame from './flame4.png';
 import feather from './feather2.png';
+import danger from './danger.png';
 
 export const assets = {
     logo,
@@ -73,5 +74,6 @@ export const assets = {
     construction,
     reset,
     flame,
-    feather
+    feather,
+    danger
 }

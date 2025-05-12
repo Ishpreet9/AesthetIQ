@@ -52,7 +52,7 @@ const Navbar = () => {
                   </button>
                 </NavLink>
                 <div className='md:block hidden border-3 border-black rounded-full group'>
-                  <NavLink>
+                  <NavLink to={'/profile'}>
                     <img src={assets.profile} alt="" className='w-[3vw] filter invert cursor-pointer' />
                   </NavLink>
                   <div className='absolute opacity-0 invisible group-hover:opacity-100 group-hover:visible top-[9vh] right-[3.5vw] bg-neutral-300 border-3 border-black font-semibold cursor-pointer rounded-md overflow-hidden transition-all duration-500'>
