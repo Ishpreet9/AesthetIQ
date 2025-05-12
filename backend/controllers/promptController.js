@@ -39,8 +39,8 @@ const randomPrompt = async (req,res) => {
             {
                 model: 'llama3-70b-8192',
                 messages: [
-                    {role: 'system', content: 'You are a prompt generator for AI image generation. You generate random creative and unique prompts for image generation and nothing else as output without writing it in double quotes.'},
-                    {role: 'user', content:`Generate a random prompt for AI image generation.`}
+                    {role: 'system', content: 'You are a prompt generator for AI image generation. You generate random creative and unique prompts for image generation and nothing else as output without writing it in double quotes. You write it different and unique each time.'},
+                    {role: 'user', content:`Generate a random prompt for AI image generation. Write it unique`}
                 ],
                 temperature: 0.7,
                 max_tokens: 250
