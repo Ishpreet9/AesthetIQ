@@ -166,12 +166,12 @@ const Generate = () => {
           <textarea onChange={(e) => setPrompt(e.target.value)} value={prompt} placeholder='Enter prompt...' name="" id="" className='bg-neutral-900 text-white md:w-[47vw] w-90 md:h-[13vw] h-43 border-3 border-black rounded-xl p-2 md:text-[1.7vw] text-xl overflow-y-scroll resize-none opacity-75 focus:outline-none custom-scroll'></textarea>
           </div>
           {/* generate and style button  */}
-          <div className='flex md:flex-col flex-row gap-4 md:h-[11vw] md:gap-[2.2vw] h-[60px] justify-between relative'>
-            <button type='submit' className='bg-neutral-900 md:text-[1.4vw] text-neutral-200 px-10 md:py-[2.7vh] py-4 rounded-xl border-3 border-black cursor-pointer hover:border-black hover:bg-neutral-300 hover:text-black hover:font-bold transition-all duration-500 font-semibold'>
+          <div className='flex md:flex-col flex-row gap-4 md:h-[11vw] md:gap-[1.75vw] h-[60px] justify-between relative'>
+            <button type='submit' className='bg-neutral-900 md:text-[1.4vw] text-neutral-200 px-10 md:py-[2.7vh] py-4 rounded-xl md:border-[0.24vw] border-3 border-black cursor-pointer hover:border-black hover:bg-neutral-300 hover:text-black hover:font-bold transition-all duration-500 font-semibold'>
               GENERATE
             </button>
             <div className='group' ref={styleBoxRef}>
-              <button type='button' onClick={() => setShowStyles(!showStyles)} className='relative z-0 md:text-[1.4vw] bg-neutral-900 text-neutral-200 px-10 md:py-[2.7vh] py-4 rounded-xl border-3 border-black cursor-pointer hover:border-neutral-200 transition-all duration-500 font-semibold min-w-44'>
+              <button type='button' onClick={() => setShowStyles(!showStyles)} className='relative z-0 md:text-[1.4vw] bg-neutral-900 text-neutral-200 px-10 md:py-[2.7vh] py-4 rounded-xl md:border-[0.24vw] border-3 border-black cursor-pointer hover:border-neutral-200 transition-all duration-500 font-semibold min-w-44'>
                 {style && <img src={style === 'anime' ? assets.anime_image : style === 'ghibli' ? assets.ghibli_image : style === 'realistic' ? assets.realistic_image : style === 'logo' ? assets.logo_image : ''} alt="" className='absolute h-full w-full object-cover rounded-xl bottom-0 left-0 opacity-70 z-0' />}
                 <div className='relative z-10'>
                   <span>{style === 'anime' ? 'Anime' : style === 'ghibli' ? 'Ghibli-Style' : style === 'realistic' ? 'Realistic' : style === 'logo' ? 'Logo' : 'Style (None)'}</span>

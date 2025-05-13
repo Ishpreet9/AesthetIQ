@@ -105,6 +105,16 @@ const imageBox = ({setShowImageBox, page}) => {
       }
     }
 
+    const copyPrompt = async() => {
+      navigator.clipboard.writeText(imageData.prompt).then(
+        ()=>{
+          console.log('Prompt copied to clipboard');
+        }
+      ).catch((error)=>{
+        console.error('Error copying text! ',error);
+      });
+    }
+
   return (
     <div className='fixed h-screen w-screen z-20 inset-0 bg-white/10 backdrop-blur-sm'>
     <div className='h-screen w-screen inset-0 text-white flex flex-col justify-between scale-96 bg-black'>
@@ -115,7 +125,7 @@ const imageBox = ({setShowImageBox, page}) => {
 
         <div className='flex gap-[0.5vw] bg-neutral-800 px-[0.7vw] items-center rounded-sm'>
           <button className='md:border-[0.1vw] border-neutral-500 p-[0.2vw] rounded-sm cursor-pointer'>
-          <img src={assets.copy} alt="" className='md:w-[1.1vw] h-[2.3vh] invert opacity-70'/>
+          <img onClick={()=>copyPrompt()} src={assets.copy} alt="" className='md:w-[1.1vw] h-[2.3vh] invert opacity-70'/>
           </button>
           <p className='text-neutral-300 whitespace-nowrap overflow-scroll custom-scroll max-w-[50vw]'>{imageData.prompt}</p>
         </div>
