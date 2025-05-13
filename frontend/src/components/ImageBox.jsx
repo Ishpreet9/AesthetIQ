@@ -106,7 +106,8 @@ const imageBox = ({setShowImageBox, page}) => {
     }
 
   return (
-    <div className='fixed z-20 bg-black text-white w-[95vw] md:h-[96vh] h-[97vh] flex flex-col justify-between md:mb-14 mb-20'>
+    <div className='fixed h-screen w-screen z-20 inset-0 bg-white/10 backdrop-blur-sm'>
+    <div className='h-screen w-screen inset-0 text-white flex flex-col justify-between scale-96 bg-black'>
       {/* top section */}
       <div className='flex items-center justify-between bg-neutral-900 w-full h-[6vh] md:px-[1vw] px-[2.2vw]'>
       {/* image details */}
@@ -131,7 +132,7 @@ const imageBox = ({setShowImageBox, page}) => {
           {
             setImageData(null);
           }
-          }}>
+        }}>
           <img src={assets.cross} alt="" className='invert md:w-[1.5vw] md:h-[1.5vw] w-5 h-5 opacity-70 cursor-pointer' />
         </button>
       </div>
@@ -148,6 +149,7 @@ const imageBox = ({setShowImageBox, page}) => {
           <img src={isBookmarked ? assets.bookmark_filled : assets.bookmark_empty} alt="" className='invert opacity-40'/>
         </button>
       </div>
+    </div>
     </div>
   )
 }
