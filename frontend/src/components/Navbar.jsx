@@ -55,9 +55,6 @@ const Navbar = () => {
                   <NavLink to={'/profile'}>
                     <img src={assets.profile} alt="" className='w-[3vw] filter invert cursor-pointer' />
                   </NavLink>
-                  <div className='absolute opacity-0 invisible group-hover:opacity-100 group-hover:visible top-[9vh] right-[3.5vw] bg-neutral-300 border-3 border-black font-semibold cursor-pointer rounded-md overflow-hidden transition-all duration-500'>
-                    <button onClick={logoutHandler} type='button' className='hover:bg-neutral-400 py-1 px-6 cursor-pointer'>LogOut</button>
-                  </div>
                 </div>
                 <button onClick={logoutHandler} className='md:hidden flex items-center bg-neutral-200 py-1 px-2 rounded-md border-3 border-black font-bold cursor-pointer'>
                     <img src={assets.logout} alt="" className='w-8' />

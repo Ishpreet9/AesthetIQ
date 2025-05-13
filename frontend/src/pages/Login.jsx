@@ -4,6 +4,7 @@ import { AppContext } from '../context/AppContext';
 import { toast } from 'react-toastify';
 import OtpInput from '../components/OtpInput';
 import { useNavigate } from 'react-router-dom';
+import { assets } from '../assets/assets';
 
 const Login = () => {
 
@@ -15,6 +16,7 @@ const Login = () => {
   const [enterOtp,setEnterOtp] = useState(false);
   const [otpArr, setOtpArr] = useState(Array(6).fill(''));
   const [isOtpLoading,setIsOtpLoading] = useState(false);
+  const [passwordVisible,setPasswordVisible] = useState(false);
   const navigate = useNavigate();
   
 
@@ -125,9 +127,17 @@ const Login = () => {
       <div className='bg-neutral-500/13 border-3 border-neutral-500/60 md:mt-[5vw] mt-25 md:px-[3vw] px-5 md:py-[2vw] py-5 flex flex-col justify-center items-center rounded-lg'>
         <h1 className='text-neutral-200 md:text-[2.7vw] text-4xl font-bold'>{signedUp ? 'LOGIN' : 'SIGN UP'}</h1>
         <form onSubmit={onSubmitHandler} action="" className='flex flex-col md:gap-[1.5vw] gap-5 md:mt-[1.5vw] mt-5 justify-center items-center'>
-          {signedUp || <input onChange={(e) => setName(e.target.value)} value={name} type="text" className='bg-black/40 border-2 border-black text-neutral-300 md:px-[1.7vw] md:w-[23.5vw] pl-5 md:py-[1.2vw] py-4 rounded-md md:text-[1.5vw] text-lg outline-none focus:border-neutral-500 transition-all duration-500' placeholder='Enter username' />}
-          <input type="email" onChange={(e) => setEmail(e.target.value)} value={email} className='bg-black/40 border-2 border-black text-neutral-300 md:px-[1.7vw] md:w-[23.5vw] pl-5 md:py-[1.2vw] py-4 rounded-md md:text-[1.5vw] text-lg outline-none focus:border-neutral-500 transition-all duration-500' placeholder='Enter email' />
-          <input type="password" onChange={(e) => setPassword(e.target.value)} value={password} className='bg-black/40 border-2 border-black text-neutral-300 md:px-[1.7vw] md:w-[23.5vw] pl-5 md:py-[1.2vw] py-4 rounded-md md:text-[1.5vw] text-lg outline-none focus:border-neutral-500 transition-all duration-500' placeholder='Enter password' />
+          {signedUp || <input onChange={(e) => setName(e.target.value)} value={name} type="text" className='bg-black/40 border-2 border-black text-neutral-300 md:px-[1.7vw] md:w-[23.5vw] w-[72vw] pl-5 md:py-[1.2vw] py-4 rounded-md md:text-[1.5vw] text-lg outline-none focus:border-neutral-500 transition-all duration-500' placeholder='Enter username' />}
+          <input type="email" onChange={(e) => setEmail(e.target.value)} value={email} className='bg-black/40 border-2 border-black text-neutral-300 md:px-[1.7vw] md:w-[23.5vw] w-[72vw] pl-5 md:py-[1.2vw] py-4 rounded-md md:text-[1.5vw] text-lg outline-none focus:border-neutral-500 transition-all duration-500' placeholder='Enter email' />
+          <div className='flex justify-center items-center bg-black/40 border-2 border-black rounded-md focus-within:border-neutral-500 transition-all duration-500 md:pr-[1.7vw] pr-4 gap-[1.7vw]'>
+          <input type={passwordVisible ? 'text' : 'password' } onChange={(e) => setPassword(e.target.value)} value={password} className='text-neutral-300 md:w-[17.9vw] pl-5 md:py-[1.2vw] py-4 md:text-[1.5vw] text-lg outline-none' placeholder='Enter password' />
+          {
+            passwordVisible ? 
+            <img onClick={()=>setPasswordVisible(false)} src={assets.eyeVisible} alt="" className='md:w-[2vw] w-8 invert opacity-40 cursor-pointer'/>
+            :
+            <img onClick={()=>setPasswordVisible(true)} src={assets.eyeHidden} alt="" className='md:w-[2vw] w-8 invert opacity-40 cursor-pointer'/>
+          }
+          </div>
           {signedUp
           ?
           <button type="submit" className='bg-neutral-200 text-black md:text-[1.6vw] text-2xl font-semibold md:px-[2vw] px-6 md:py-[0.8vw] py-2 rounded-md cursor-pointer border-2 border-neutral-900 hover:bg-black/40 hover:border-neutral-400/90 hover:text-neutral-200 transition-all duration-400'>

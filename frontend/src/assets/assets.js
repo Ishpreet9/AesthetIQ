@@ -36,6 +36,8 @@ import reset from './reset.png';
 import flame from './flame4.png';
 import feather from './feather2.png';
 import danger from './danger.png';
+import eyeVisible from './eyeVisible.png';
+import eyeHidden from './eyeHidden.png';
 
 export const assets = {
     logo,
@@ -75,5 +77,7 @@ export const assets = {
     reset,
     flame,
     feather,
-    danger
+    danger,
+    eyeVisible,
+    eyeHidden
 }

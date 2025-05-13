@@ -13,7 +13,9 @@ const Profile = () => {
   const [newUsername,setNewUsername] = useState('');
   const [oldPassword,setOldPassword] = useState('');
   const [newPassword,setNewPassword] = useState('');
-  const [deleteConfirmation,setDeleteConfirmation] = useState(true);
+  const [oldPasswordVisible,setOldPasswordVisible] = useState(false);
+  const [newPasswordVisible,setNewPasswordVisible] = useState(false);
+  const [deleteConfirmation,setDeleteConfirmation] = useState(false);
 
   const accountDelete = async() => {
     try {
@@ -174,8 +176,24 @@ const Profile = () => {
               <div className='relative flex flex-col items-center bg-neutral-700 p-[1vw] gap-[1vw] rounded-md'>
                 <img onClick={() => setChangePwd(false)} src={assets.cross} alt="" className='invert opacity-60 absolute cursor-pointer w-[2vw] right-[1.2vw] p-[0.2vw] rounded-md' />
                 <p>Change Password</p>
-                <input type="password" onChange={(e)=>setOldPassword(e.target.value)} value={oldPassword} className='bg-neutral-900 w-[21vw] px-[1.5vw] py-[0.7vw] text-[1.4vw] outline-none border-2 border-neutral-900 focus:border-neutral-500 transition-all duration-500 rounded-md' placeholder='Enter Old Password' />
-                <input type="password" onChange={(e)=>setNewPassword(e.target.value)} value={newPassword} className='bg-neutral-900 w-[21vw] px-[1.5vw] py-[0.7vw] text-[1.4vw] outline-none border-2 border-neutral-900 focus:border-neutral-500 transition-all duration-500 rounded-md' placeholder='Enter New Password' />
+                <div className='flex justify-center items-center gap-[1vw] bg-neutral-900 w-[22vw] border-2 border-neutral-900 rounded-md focus-within:border-neutral-500 transition-all duration-500 pr-[1.7vw]'>
+                <input type={oldPasswordVisible ? 'text' : 'password'} onChange={(e)=>setOldPassword(e.target.value)} value={oldPassword} className='pl-[1.7vw] py-[0.7vw] text-[1.4vw] outline-none' placeholder='Enter Old Password' />
+                {
+                  oldPasswordVisible ? 
+                  <img onClick={()=>setOldPasswordVisible(false)} src={assets.eyeVisible} alt="" className='w-[2.2vw] invert opacity-40 cursor-pointer' />
+                  :
+                  <img onClick={()=>setOldPasswordVisible(true)} src={assets.eyeHidden} alt="" className='w-[2.2vw] invert opacity-40 cursor-pointer' />
+                }
+                </div>
+                <div className='flex justify-center items-center gap-[1vw] bg-neutral-900 w-[22vw] border-2 border-neutral-900 rounded-md focus-within:border-neutral-500 transition-all duration-500 pr-[1.7vw]'>
+                <input type={newPasswordVisible ? 'text' : 'password'} onChange={(e)=>setNewPassword(e.target.value)} value={newPassword} className='pl-[1.7vw] py-[0.7vw] text-[1.4vw] outline-none' placeholder='Enter New Password' />
+                {
+                  newPasswordVisible ? 
+                  <img onClick={()=>setNewPasswordVisible(false)} src={assets.eyeVisible} alt="" className='w-[2.2vw] invert opacity-40 cursor-pointer' />
+                  :
+                  <img onClick={()=>setNewPasswordVisible(true)} src={assets.eyeHidden} alt="" className='w-[2.2vw] invert opacity-40 cursor-pointer' />
+                }
+                </div>                
                 <button onClick={()=>passwordChange()} className='bg-yellow-600 px-[1vw] py-[0.5vw] rounded-md font-medium cursor-pointer hover:bg-yellow-500 transition-all duration-300'>
                   CONFIRM
                 </button>
