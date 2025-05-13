@@ -10,7 +10,7 @@ const AppContextProvider = (props) => {
     const [image,setImage] = useState('');
     const [imageData,setImageData] = useState();
     const [bookmarkChange, setBookmarkChange] = useState(false); //true or false here has no conceptual value here it just keeps track of when bookmark is changed
-    const [email,setEmail] = useState('');
+    const [email,setEmail] = useState(null);
 
     const getCredits = async () => {
         const response = await axios.post(backendUrl+'/api/user/credits',{user},{withCredentials:true});
@@ -23,7 +23,7 @@ const AppContextProvider = (props) => {
     }
 
     const value = {
-        user, setUser, backendUrl, credits, setCredits, image, setImage, getCredits, imageData, setImageData, bookmarkChange, setBookmarkChange, email
+        user, setUser, backendUrl, credits, setCredits, image, setImage, getCredits, imageData, setImageData, bookmarkChange, setBookmarkChange, email, setEmail
     }
 
     useEffect(()=>{

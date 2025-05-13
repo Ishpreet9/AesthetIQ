@@ -51,11 +51,9 @@ const Navbar = () => {
                     <img src={assets.flame} alt="" className='md:w-[2vw] w-6' />
                   </button>
                 </NavLink>
-                <div className='md:block hidden border-3 border-black rounded-full group'>
-                  <NavLink to={'/profile'}>
-                    <img src={assets.profile} alt="" className='w-[3vw] filter invert cursor-pointer' />
-                  </NavLink>
-                </div>
+                <NavLink to={'/profile'} className='flex justify-center items-center text-center bg-neutral-200 text-neutral-900 md:text-[2.5vw] text-5xl md:pb-[0.4vw] pb-[1.5vw] font-bold md:w-[4vw] w-17 md:h-[4vw] h-17 rounded-full border-3 border-black'>
+                  <span>{user.charAt(0)}</span>
+                </NavLink>
                 <button onClick={logoutHandler} className='md:hidden flex items-center bg-neutral-200 py-1 px-2 rounded-md border-3 border-black font-bold cursor-pointer'>
                     <img src={assets.logout} alt="" className='w-8' />
                   </button>

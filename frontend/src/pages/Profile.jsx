@@ -7,7 +7,7 @@ import axios from 'axios'
 
 const Profile = () => {
 
-  const { user, credits, backendUrl, setUser, setCredits, getCredits, email } = useContext(AppContext);
+  const { user, credits, backendUrl, setUser, setCredits, getCredits, email, setEmail } = useContext(AppContext);
   const navigate = useNavigate();
   const [changePwd, setChangePwd] = useState(false);
   const [newUsername, setNewUsername] = useState('');
@@ -77,6 +77,7 @@ const Profile = () => {
   const logout = () => {
     setUser(null);
     setCredits(null);
+    setEmail(null);
   }
   const logoutHandler = async () => {
     try {
@@ -97,7 +98,7 @@ const Profile = () => {
   }
 
   return (
-    <div className='text-white flex flex-col items-start mx-[5vw] md:mt-0 mt-2 gap-[2vw]'>
+    <div className='text-white flex flex-col items-start mx-[5vw] md:mt-0 mt-10 gap-[2vw] md:scale-100 scale-110'>
       {deleteConfirmation &&
         <div className='fixed z-10 inset-0 w-screen h-screen flex items-center justify-center bg-white/10 backdrop-blur-lg'>
           <div className='flex flex-col bg-neutral-900 gap-[2vw] px-[3vw] py-[3vw] rounded-lg'>
@@ -118,7 +119,10 @@ const Profile = () => {
         {/* user details and credits and account */}
         <div className='flex flex-col md:items-start items-center gap-[2vw]'>
           <div className='flex flex-col md:items-start items-center'>
-            <img src={assets.profile} alt="" className='md:w-[5vw] w-[17vw] invert border-3 rounded-full' />
+            {/* <img src={assets.profile} alt="" className='md:w-[5vw] w-[17vw] invert border-3 rounded-full' /> */}
+            <div className='flex justify-center items-center text-center bg-neutral-200 text-neutral-900 md:text-[3.8vw] text-5xl md:pb-[0.5vw] pb-[1.5vw] font-bold md:w-[6vw] w-17 md:h-[6vw] h-17 rounded-full border-3 border-black'>
+              <span>{user.charAt(0)}</span>
+            </div>
             <p className='font-semibold md:text-[2.3vw] text-[6vw]'>{user}</p>
             <p className='md:text-[1.45vw] text-md'>{email}</p>
           </div>
