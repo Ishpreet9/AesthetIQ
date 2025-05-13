@@ -7,7 +7,7 @@ import axios from 'axios'
 
 const Profile = () => {
 
-  const { user, credits, backendUrl, setUser, setCredits, getCredits } = useContext(AppContext);
+  const { user, credits, backendUrl, setUser, setCredits, getCredits, email } = useContext(AppContext);
   const navigate = useNavigate();
   const [changePwd, setChangePwd] = useState(false);
   const [newUsername, setNewUsername] = useState('');
@@ -120,7 +120,7 @@ const Profile = () => {
           <div className='flex flex-col md:items-start items-center'>
             <img src={assets.profile} alt="" className='md:w-[5vw] w-[17vw] invert border-3 rounded-full' />
             <p className='font-semibold md:text-[2.3vw] text-[6vw]'>{user}</p>
-            <p className='md:text-[1.45vw] text-md'>useremail@mail.com</p>
+            <p className='md:text-[1.45vw] text-md'>{email}</p>
           </div>
           <div className='bg-neutral-700 md:px-[1.5vw] px-[3.6vw] md:py-[1vw] py-[1.7vw] flex items-center md:gap-[1.1vw] gap-2 rounded-md'>
             <p className='md:text-[1.4vw] text-lg'>Credits : </p>
@@ -133,13 +133,13 @@ const Profile = () => {
             </NavLink>
           </div>
           {/* logout and delete account for larger screen*/}
-          <div className='md:block hidden flex flex-col items-start gap-[1.2vw] mt-[3vw]'>
+          <div className='md:block hidden flex flex-col items-start gap-[1.3vw] mt-[3vw]'>
             {/* logout button */}
             <button onClick={logoutHandler} className='bg-white text-black text-[1.5vw] border-2 border-black font-semibold px-[1.3vw] py-[0.5vw] rounded-md cursor-pointer hover:bg-neutral-900 hover:text-neutral-200 hover:border-neutral-200 transition-all duration-400'>
               LogOut
             </button>
             {/* delete account */}
-            <div className='flex flex-col'>
+            <div className='flex flex-col mt-[1.2vw]'>
               <p className='text-red-400'>Delete Account ?</p>
               <div className='flex flex-col items-start gap-[0.5vw] border-1 border-red-400 p-[0.7vw] rounded-md'>
                 <div className='flex items-center gap-[0.3vw] px-[0.3vw]'>

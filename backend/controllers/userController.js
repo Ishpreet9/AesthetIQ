@@ -92,7 +92,7 @@ const userCredits = async (req, res) => {
         if (!user) {
             return res.status(404).json({ success: false, message: 'User not found' });
         }
-        return res.json({ success: true, credits: user.creditBalance, user: { name: user.name } })
+        return res.json({ success: true, credits: user.creditBalance, user: user.name, email: user.email })
     } catch (error) {
         return res.status(500).json({ success: false, message: error.message });
     }
