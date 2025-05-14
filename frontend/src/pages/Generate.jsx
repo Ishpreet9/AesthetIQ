@@ -112,7 +112,7 @@ const Generate = () => {
   return (
     <div className='flex flex-col items-center justify-center'>
       {showImageBox ? <ImageBox setShowImageBox={setShowImageBox} page={'generate'}/> : <div className='hidden'></div>}
-      <div className='flex flex-col gap-6 text-center justify-center items-center mt-[6.7vh]'>
+      <div className='flex flex-col gap-6 text-center justify-center items-center md:mt-[6.7vh] mt-7'>
         {/* image section */}
         <div onClick={() => { 
           if(imageData)

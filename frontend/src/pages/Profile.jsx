@@ -98,9 +98,9 @@ const Profile = () => {
   }
 
   return (
-    <div className='text-white flex flex-col items-start mx-[5vw] md:mt-0 mt-10 gap-[2vw] md:scale-100 scale-110'>
+    <div className='text-white flex flex-col items-start mx-[5vw] md:mt-0 mt-10 gap-[2vw]'>
       {deleteConfirmation &&
-        <div className='fixed z-10 inset-0 w-screen h-screen flex items-center justify-center bg-white/10 backdrop-blur-lg'>
+        <div className='fixed z-30 inset-0 w-screen h-screen flex items-center justify-center bg-white/10 backdrop-blur-lg'>
           <div className='flex flex-col bg-neutral-900 gap-[2vw] px-[3vw] py-[3vw] rounded-lg'>
             <p className='text-[1.4vw]'>Are you sure you want to delete your account ?</p>
             <div className='flex justify-around'>

@@ -116,7 +116,7 @@ const imageBox = ({setShowImageBox, page}) => {
     }
 
   return (
-    <div className='fixed h-screen w-screen z-20 inset-0 bg-white/10 backdrop-blur-sm'>
+    <div className='fixed h-screen w-screen z-30 inset-0 bg-white/10 backdrop-blur-sm'>
     <div className='h-screen w-screen inset-0 text-white flex flex-col justify-between scale-96 bg-black'>
       {/* top section */}
       <div className='flex items-center justify-between bg-neutral-900 w-full h-[6vh] md:px-[1vw] px-[2.2vw]'>

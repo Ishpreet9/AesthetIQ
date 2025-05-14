@@ -36,35 +36,35 @@ const BuyCredits = () => {
   return (
     <div className='flex flex-col items-center'>
       <div className='flex flex-col items-center gap-[0.7vw]'>
-      <div className='flex items-center gap-[1vw] mt-[2vw]'>
-        <img src={assets.construction} alt="" className='w-[3.4vw] invert opacity-40' />
-        <p className='text-neutral-400 text-[1.3vw]'>Payment system under development ! Need more credits ? Reset credits for now...</p>
+      <div className='flex items-center md:gap-[1vw] gap-2 mt-[2vw] md:p-0 p-7'>
+        <img src={assets.construction} alt="" className='md:w-[3.4vw] w-10 invert opacity-40' />
+        <p className='text-neutral-400 md:text-[1.3vw]'>Payment system under development ! Need more credits ? Reset credits for now & enjoy unlimited generations...</p>
       </div>
-      <button onClick={()=>resetCreditsHandler()} className='flex justify-center items-center gap-[0.5vw] bg-blue-400 w-[12vw] h-[3vw] rounded-md text-white cursor-pointer hover:bg-blue-500'>
-        <p className='text-[1.2vw] font-semibold'>RESET CREDITS</p>
-        <img src={assets.reset} alt="" className='w-[2vw] h-[2vw] invert' />
+      <button onClick={()=>resetCreditsHandler()} className='flex justify-center items-center md:gap-[0.5vw] gap-2 bg-blue-400 md:w-[12vw] md:h-[3vw] rounded-md text-white md:p-0 p-2 cursor-pointer hover:bg-blue-500'>
+        <p className='md:text-[1.2vw] text-lg font-semibold'>RESET CREDITS</p>
+        <img src={assets.reset} alt="" className='md:w-[2vw] md:h-[2vw] w-6 h-6 invert' />
       </button>
       </div>
-      <div className='flex justify-center text-neutral-200 mt-[5vw] text-[3vw] font-bold'>
+      <div className='flex justify-center text-neutral-200 md:mt-[5vw] mt-10 md:text-[3vw] text-3xl font-bold'>
         <p>BUY CREDITS</p>
       </div>
       <p className='text-neutral-200'>(1 CREDIT: ₹10)</p>
-      <form className='flex flex-col items-center gap-[3.9vw] text-neutral-200 mt-[2vw]'>
+      <form className='flex flex-col items-center md:gap-[3.9vw] gap-5 text-neutral-200 mt-[2vw]'>
         <div className='flex flex-col gap-[1vw]'>
-          <p className='text-[1.6vw]'>Credit Amount: </p>
-          <div className='flex gap-[1vw] items-center'>
-          <input type="number" value={creditAmount} onChange={(e)=>setCreditAmount(e.target.value)} className='bg-neutral-700 no-spinners text-neutral-200 text-[2vw] px-[1vw] w-[25vw] h-[4vw] border-2 border-neutral-600' />
-          <button onClick={()=>setCreditAmount(prev=>prev-1)} type='button' className='flex justify-center items-center bg-red-400 w-[4vw] h-[4vw] text-[3vw] text-white pb-[0.4vw] cursor-pointer'>
+          <p className='md:text-[1.6vw] text-lg'>Credit Amount: </p>
+          <div className='flex md:gap-[1vw] gap-2 items-center'>
+          <input type="number" value={creditAmount} onChange={(e)=>setCreditAmount(e.target.value)} className='bg-neutral-700 no-spinners text-neutral-200 md:text-[2vw] text-lg md:px-[1vw] px-2 md:w-[25vw] w-55 md:h-[4vw] h-10 border-2 border-neutral-600' />
+          <button onClick={()=>setCreditAmount(prev=>prev-1)} type='button' className='flex justify-center items-center bg-red-400 md:w-[4vw] md:h-[4vw] w-10 h-10 md:text-[3vw] text-5xl text-white md:pb-[0.4vw] pb-3 cursor-pointer'>
             -
           </button>
-          <button onClick={()=>setCreditAmount(prev=>prev+1)} type='button' className='flex justify-center items-center bg-green-400 w-[4vw] h-[4vw] text-[3vw] text-white pb-[0.4vw] cursor-pointer'>
+          <button onClick={()=>setCreditAmount(prev=>prev+1)} type='button' className='flex justify-center items-center bg-green-400 md:w-[4vw] md:h-[4vw] w-10 h-10 md:text-[3vw] text-5xl text-white md:pb-[0.4vw] pb-3 cursor-pointer'>
             +
           </button>
         </div>
         </div>
         <div className='flex flex-col justify-center items-center'>
-        <p className='text-neutral-200 text-[1.3vw]'>Price: ₹{10*creditAmount}</p>
-        <button type='button' className='bg-blue-400 rounded-md w-[11vw] h-[4vw] text-[1.6vw] text-white cursor-pointer hover:bg-blue-500'>
+        <p className='text-neutral-200 md:text-[1.3vw] text-2xl'>Price: ₹{10*creditAmount}</p>
+        <button type='button' className='bg-blue-400 rounded-md md:w-[11vw] md:h-[4vw] md:text-[1.6vw] text-2xl md:px-0 px-3 md:py-0 py-2 md:mt-0 mt-5 text-white cursor-pointer hover:bg-blue-500'>
           <p>Buy Now</p>
         </button>
         </div>
