@@ -118,8 +118,8 @@ const Login = () => {
   return (
     enterOtp 
     ? 
-    <div className='flex flex-col h-[87vh] justify-center items-center gap-[2vw] pb-[1vw]'>
-      <p className='text-neutral-200 text-[2vw] font-semibold'>Enter OTP</p>
+    <div className='flex flex-col h-[87vh] justify-center items-center md:gap-[2vw] gap-7 pb-[1vw]'>
+      <p className='text-neutral-200 md:text-[2vw] text-2xl font-semibold'>Enter OTP</p>
       <OtpInput handleOtpSubmit={handleOtpSubmit} otpArr={otpArr} setOtpArr={setOtpArr} />
     </div>
     :
@@ -130,7 +130,7 @@ const Login = () => {
           {signedUp || <input onChange={(e) => setName(e.target.value)} value={name} type="text" className='bg-black/40 border-2 border-black text-neutral-300 md:px-[1.7vw] md:w-[23.5vw] w-[72vw] pl-5 md:py-[1.2vw] py-4 rounded-md md:text-[1.5vw] text-lg outline-none focus:border-neutral-500 transition-all duration-500' placeholder='Enter username' />}
           <input type="email" onChange={(e) => setEmail(e.target.value)} value={email} className='bg-black/40 border-2 border-black text-neutral-300 md:px-[1.7vw] md:w-[23.5vw] w-[72vw] pl-5 md:py-[1.2vw] py-4 rounded-md md:text-[1.5vw] text-lg outline-none focus:border-neutral-500 transition-all duration-500' placeholder='Enter email' />
           <div className='flex justify-center items-center bg-black/40 border-2 border-black rounded-md focus-within:border-neutral-500 transition-all duration-500 md:pr-[1.7vw] pr-4 gap-[1.7vw]'>
-          <input type={passwordVisible ? 'text' : 'password' } onChange={(e) => setPassword(e.target.value)} value={password} className='text-neutral-300 md:w-[17.9vw] pl-5 md:py-[1.2vw] py-4 md:text-[1.5vw] text-lg outline-none' placeholder='Enter password' />
+          <input type={passwordVisible ? 'text' : 'password' } onChange={(e) => setPassword(e.target.value)} value={password} className='text-neutral-300 md:w-[17.9vw] max-w-[57vw] pl-5 md:py-[1.2vw] py-4 md:text-[1.5vw] text-lg outline-none' placeholder='Enter password' />
           {
             passwordVisible ? 
             <img onClick={()=>setPasswordVisible(false)} src={assets.eyeVisible} alt="" className='md:w-[2vw] w-8 invert opacity-40 cursor-pointer'/>

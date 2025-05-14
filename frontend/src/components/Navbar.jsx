@@ -2,36 +2,12 @@ import React, { useContext, useState } from 'react'
 import { Outlet, Link, NavLink, useNavigate } from 'react-router-dom'
 import { assets } from '../assets/assets'
 import { AppContext } from '../context/AppContext';
-import axios from 'axios';
 
 const Navbar = () => {
 
   const { user, credits, setUser, setCredits, backendUrl } = useContext(AppContext);
   const navigate = useNavigate();
   const [showMenu, setShowMenu] = useState(false);
-
-  const logout = () => {
-    setUser(null);
-    setCredits(null);
-  }
-
-  const logoutHandler = async () => {
-    try {
-      const response = await axios.post(backendUrl + '/api/user/logout', {}, {
-        withCredentials: true
-      });
-      if (response.data.success) {
-        logout();
-        navigate('/');
-        console.log('User logged out successfully');
-      }
-      else {
-        console.log('Logout failed');
-      }
-    } catch (err) {
-      console.error('Logout error: ', err)
-    }
-  }
 
   return (
     <div className='flex flex-col justify-center '>
@@ -40,7 +16,7 @@ const Navbar = () => {
           <Link to='/'>
             <img src={assets.logo} alt="" className='md:w-[4.5vw] w-14 filter invert' />
           </Link>
-          <p className='text-neutral-200 md:inline hidden'>{`Hello ${user}`}</p>
+          <p className='text-neutral-200 md:inline hidden'>{user?`Hello ${user}`:'AesthetiQ'}</p>
         </div>
         <div>
           {user ?
@@ -51,12 +27,9 @@ const Navbar = () => {
                     <img src={assets.flame} alt="" className='md:w-[2vw] w-6' />
                   </button>
                 </NavLink>
-                <NavLink to={'/profile'} className='flex justify-center items-center text-center bg-neutral-200 text-neutral-900 md:text-[2.5vw] text-5xl md:pb-[0.4vw] pb-[1.5vw] font-bold md:w-[4vw] w-17 md:h-[4vw] h-17 rounded-full border-3 border-black'>
+                <NavLink to={'/profile'} className='flex justify-center items-center text-center bg-neutral-200 text-neutral-900 md:text-[2.5vw] text-4xl md:pb-[0.4vw] pb-[1.5vw] font-bold md:w-[4vw] w-13 md:h-[4vw] h-13 rounded-full border-3 border-black'>
                   <span>{user.charAt(0)}</span>
                 </NavLink>
-                <button onClick={logoutHandler} className='md:hidden flex items-center bg-neutral-200 py-1 px-2 rounded-md border-3 border-black font-bold cursor-pointer'>
-                    <img src={assets.logout} alt="" className='w-8' />
-                  </button>
               </div>
             :
             <div>

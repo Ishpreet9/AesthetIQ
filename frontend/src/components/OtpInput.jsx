@@ -50,15 +50,15 @@ const OtpInput = ({handleOtpSubmit,otpArr,setOtpArr}) => {
   },[])
   
   return (
-    <form onSubmit={(e)=>handleOtpSubmit(e)} className='flex flex-col gap-[1vw] items-center gap-[4vw]'> 
-      <div className='flex gap-[1vw]'>
+    <form onSubmit={(e)=>handleOtpSubmit(e)} className='flex flex-col items-center md:gap-[4vw] gap-12'> 
+      <div className='flex md:gap-[1vw] gap-2'>
       {
         Array(6).fill(0).map((_,index)=>(
-          <input onKeyUp={(e)=>handleOnKeyUp(e,index)} onChange={(e)=>handleChange(e,index)} onPaste={(e)=>handlePaste(e)} ref={(el)=>inputRefs.current[index]=el} type="text" inputMode='numeric' pattern='[0-9]' maxLength='1' key={index} required className='w-[6vw] h-[6vw] text-[2vw] text-neutral-200 bg-neutral-700/90 border-2 border-neutral-500 no-spinners text-center rounded-md'/>
+          <input onKeyUp={(e)=>handleOnKeyUp(e,index)} onChange={(e)=>handleChange(e,index)} onPaste={(e)=>handlePaste(e)} ref={(el)=>inputRefs.current[index]=el} type="text" inputMode='numeric' pattern='[0-9]' maxLength='1' key={index} required className='md:w-[6vw] md:h-[6vw] w-12 h-12 md:text-[2vw] text-xl text-neutral-200 bg-neutral-700/90 border-2 border-neutral-500 no-spinners text-center rounded-md'/>
         ))
       }
       </div>
-      <button type='submit' className='bg-neutral-200 text-[1.5vw] font-semibold rounded-md border-2 border-black px-[4vw] py-[1vw] transition-all duration-500 hover:bg-neutral-700/90 hover:text-neutral-200 hover:border-neutral-300 cursor-pointer'>SUBMIT</button>
+      <button type='submit' className='bg-neutral-200 md:text-[1.5vw] text-2xl font-semibold rounded-md border-2 border-black px-[4vw] py-[1vw] transition-all duration-500 hover:bg-neutral-700/90 hover:text-neutral-200 hover:border-neutral-300 cursor-pointer'>SUBMIT</button>
     </form>
   )
 }
