@@ -14,7 +14,7 @@ const app = express();
 
 app.use(cors({
     // origin: "http://localhost:5173",
-    origin: "https://dqgplh10-5173.inc1.devtunnels.ms",
+    origin: "https://enchanting-semifreddo-0a6e5e.netlify.app",
     credentials: true
 }));
 app.use(cookieParser());
