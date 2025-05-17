@@ -13,7 +13,6 @@ const PORT = process.env.PORT || 4000
 const app = express();
 
 app.use(cors({
-    // origin: "http://localhost:5173",
     origin: "https://enchanting-semifreddo-0a6e5e.netlify.app",
     credentials: true
 }));
