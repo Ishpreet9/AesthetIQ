@@ -1,24 +1,27 @@
 import React from 'react'
-import { assets } from '../assets/assets';
+import { FaWandMagicSparkles } from "react-icons/fa6";
+import { HiLightBulb } from "react-icons/hi";
+import { IoMdDownload } from "react-icons/io";
+
 
 const Steps = () => {
     const steps = [
         {
           title: "Describe Your Vision",
           explanation: "Craft a vivid description of your imagination",
-          iconName: "idea",
+          iconName: HiLightBulb,
           step: 1
         },
         {
           title: "Witness the Magic",
           explanation: "Observe AI transforming words into visual wonder",
-          iconName: "wand",
+          iconName: FaWandMagicSparkles,
           step: 2
         },
         {
           title: "Download & Share",
           explanation: "Claim your masterpiece and spread the inspiration",
-          iconName: "download",
+          iconName: IoMdDownload,
           step: 3
         }
       ];
@@ -42,7 +45,7 @@ const Steps = () => {
               >
                 {/* Icon container */}
                 <div className="w-16 h-16 rounded-lg flex items-center justify-center mr-6 bg-neutral-600">
-                    <img src={assets[`${step.iconName}`]} alt="" className='w-8 filter invert opacity-50' />
+                    <step.iconName size={step.step===2 ? 35 : 40} color='white' className='opacity-50'/>
                 </div>
     
                 {/* Content */}

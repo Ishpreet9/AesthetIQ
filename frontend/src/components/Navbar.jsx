@@ -1,6 +1,10 @@
 import React, { useContext, useState } from 'react'
 import { Outlet, Link, NavLink, useNavigate } from 'react-router-dom'
 import { assets } from '../assets/assets'
+import { GiHamburgerMenu } from "react-icons/gi";
+import { RxCross2 } from "react-icons/rx";
+import { LuLogIn } from "react-icons/lu";
+import { GiMoneyStack } from "react-icons/gi";
 import { AppContext } from '../context/AppContext';
 
 const Navbar = () => {
@@ -27,26 +31,30 @@ const Navbar = () => {
                     <img src={assets.flame} alt="" className='md:w-[2vw] w-6' />
                   </button>
                 </NavLink>
-                <NavLink to={'/profile'} className='flex justify-center items-center text-center bg-neutral-200 text-neutral-900 md:text-[2.5vw] text-4xl md:pb-[0.2vw] pb-[1.5vw] font-bold md:w-[4vw] w-13 md:h-[4vw] h-13 rounded-full border-3 border-black'>
+                <NavLink to={'/profile'} className='flex justify-center items-center text-center bg-neutral-200 text-neutral-900 md:text-[2.5vw] text-4xl md:pb-[0.2vw] font-bold md:w-[4vw] w-13 md:h-[4vw] h-13 rounded-full border-3 border-black'>
                   <span>{user.charAt(0)}</span>
                 </NavLink>
               </div>
             :
             <div>
               <div className='relative md:invisible visible block md:hidden'>
-                <div>
-                  <img src={assets.menu} alt="" className='w-10 invert opacity-80' onClick={() => setShowMenu(!showMenu)} />
+                <div onClick={()=>setShowMenu(true)}>
+                  <GiHamburgerMenu size={40} color='white'/>
                 </div>
                 {
                 showMenu &&
                 <div className={`fixed w-screen h-screen z-20 inset-0 bg-white/10 backdrop-blur-sm flex flex-col justify-center items-center`}>
-                    <img onClick={()=>setShowMenu(false)} src={assets.cross} alt="" className='absolute w-[9vw] right-8 top-8 invert opacity-50' />
-                  <div className='relative flex flex-col text-[7.5vw] border-3 border-black font-semibold gap-6 bg-neutral-800 p-10 rounded-xl'>
-                    <NavLink to={'/login'} onClick={()=>setShowMenu(false)} className="flex justify-center items-center border-3 border-neutral-500 px-5 py-4 bg-neutral-700 text-white rounded-lg">
-                      LOGIN
+                    <div onClick={()=>setShowMenu(false)} className='absolute right-8 top-8 opacity-90'>
+                      <RxCross2 size={40} color='white'/>
+                    </div>
+                  <div className='relative flex flex-col text-lg border-3 border-black font-semibold gap-6 bg-neutral-800 p-8 rounded-xl'>
+                    <NavLink to={'/login'} onClick={()=>setShowMenu(false)} className="flex gap-[2.5vw] justify-evenly items-center border-3 border-neutral-500 px-5 py-4 bg-neutral-700 text-neutral-200 rounded-lg">
+                      <LuLogIn size={30} color='white' className='opacity-90'/>
+                      <span>LOGIN</span>
                     </NavLink>
-                    <NavLink to={'/buy'} onClick={()=>setShowMenu(false)} className="flex justify-center items-center border-3 border-neutral-500 px-5 py-4 bg-neutral-700 text-white rounded-lg">
-                      PRICING
+                    <NavLink to={'/buy'} onClick={()=>setShowMenu(false)} className="flex gap-[2.5vw] justify-evenly items-center border-3 border-neutral-500 px-5 py-4 bg-neutral-700 text-neutral-200 rounded-lg">
+                      <GiMoneyStack size={30} color='white' className='opacity-90' />
+                      <span>PRICING</span>
                     </NavLink>
                   </div>
                 </div>

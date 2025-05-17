@@ -1,7 +1,10 @@
 import React, { useContext, useEffect, useState } from 'react'
-import { assets } from '../assets/assets'
+import { RxCross2 } from "react-icons/rx";
 import { AppContext } from '../context/AppContext'
 import { toast } from 'react-toastify';
+import { FaBookmark, FaRegBookmark } from "react-icons/fa6";
+import { IoMdDownload } from "react-icons/io";
+import { FaCopy } from "react-icons/fa";
 import axios from 'axios';
 
 
@@ -124,8 +127,9 @@ const imageBox = ({setShowImageBox, page}) => {
       <div className='flex md:gap-[1vw] gap-2'>
 
         <div className='flex gap-[0.5vw] bg-neutral-800 px-[0.7vw] items-center rounded-sm'>
-          <button className='md:border-[0.1vw] border-neutral-500 p-[0.2vw] rounded-sm cursor-pointer'>
-          <img onClick={()=>copyPrompt()} src={assets.copy} alt="" className='md:w-[1.1vw] h-[2.3vh] invert opacity-70'/>
+          <button className='border-neutral-500 md:p-[0.2vw] p-[0.5vw] rounded-sm cursor-pointer'>
+          {/* <img onClick={()=>copyPrompt()} src={assets.copy} alt="" className='md:w-[1.1vw] h-[2.3vh] invert opacity-70'/> */}
+          <FaCopy size={18} color='white' className='opacity-80'/>
           </button>
           <p className='text-neutral-300 whitespace-nowrap overflow-scroll custom-scroll max-w-[50vw]'>{imageData.prompt}</p>
         </div>
@@ -143,7 +147,7 @@ const imageBox = ({setShowImageBox, page}) => {
             setImageData(null);
           }
         }}>
-          <img src={assets.cross} alt="" className='invert md:w-[1.5vw] md:h-[1.5vw] w-5 h-5 opacity-70 cursor-pointer' />
+          <RxCross2 size={32} color='white' className='opacity-90 cursor-pointer'/>
         </button>
       </div>
       {/* image section */}
@@ -152,11 +156,16 @@ const imageBox = ({setShowImageBox, page}) => {
       </div>
       {/* bottom section */}
       <div className=' flex md:flex-col gap-5 items-center justify-end pr-5 z-30 absolute right-0 bottom-5'>
-        <button onClick={()=>{downloadImage()}} className='bg-neutral-700 w-[7vh] h-[7vh] rounded-xl md:p-[0.4vw] p-2 cursor-pointer hover:border-2 border-neutral-300'>
-          <img src={assets.download} alt="" className='invert opacity-40'/>
+        <button onClick={()=>{downloadImage()}} className='flex justify-center items-center bg-neutral-700 w-[7vh] h-[7vh] rounded-xl cursor-pointer hover:border-2 border-neutral-300'>
+          <IoMdDownload size={34} color='white' className='opacity-90'/>
         </button>
-        <button onClick={()=>toggleBookmark()} className='bg-neutral-700 w-[7vh] h-[7vh] rounded-xl md:p-[0.8vw] p-3 cursor-pointer hover:border-2 border-neutral-300'>
-          <img src={isBookmarked ? assets.bookmark_filled : assets.bookmark_empty} alt="" className='invert opacity-40'/>
+        <button onClick={()=>toggleBookmark()} className='flex justify-center items-center bg-neutral-700 w-[7vh] h-[7vh] rounded-xl cursor-pointer hover:border-2 border-neutral-300'>
+          {/* <img src={isBookmarked ? assets.bookmark_filled : assets.bookmark_empty} alt="" className='invert opacity-40'/> */}
+          {isBookmarked ? 
+          <FaBookmark size={26} color='white' className='opacity-90'/>
+          :
+          <FaRegBookmark size={26} color='white' className='opacity-90'/>
+          }
         </button>
       </div>
     </div>

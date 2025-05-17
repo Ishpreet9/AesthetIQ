@@ -3,6 +3,10 @@ import { assets } from '../assets/assets'
 import { NavLink, useNavigate } from 'react-router-dom'
 import { AppContext } from '../context/AppContext'
 import { toast } from 'react-toastify';
+import { FiLogOut } from "react-icons/fi";
+import { IoIosWarning } from "react-icons/io";
+import { RxCross2 } from "react-icons/rx";
+import { VscEye, VscEyeClosed } from "react-icons/vsc";
 import axios from 'axios'
 
 const Profile = () => {
@@ -119,9 +123,8 @@ const Profile = () => {
         {/* user details and credits and account */}
         <div className='flex flex-col md:items-start items-center gap-[2vw]'>
           <div className='flex flex-col md:items-start items-center'>
-            {/* <img src={assets.profile} alt="" className='md:w-[5vw] w-[17vw] invert border-3 rounded-full' /> */}
             <div className='flex justify-center items-center text-center bg-neutral-200 text-neutral-900 md:text-[3.8vw] text-5xl md:pb-[0.5vw] pb-[1.5vw] font-bold md:w-[6vw] w-17 md:h-[6vw] h-17 rounded-full border-3 border-black'>
-              <span>{user.charAt(0)}</span>
+              <span>{String(user).charAt(0)}</span>
             </div>
             <p className='font-semibold md:text-[2.3vw] text-[6vw]'>{user}</p>
             <p className='md:text-[1.45vw] text-md'>{email}</p>
@@ -139,15 +142,16 @@ const Profile = () => {
           {/* logout and delete account for larger screen*/}
           <div className='md:block hidden flex flex-col items-start gap-[1.3vw] mt-[3vw]'>
             {/* logout button */}
-            <button onClick={logoutHandler} className='bg-white text-black text-[1.5vw] border-2 border-black font-semibold px-[1.3vw] py-[0.5vw] rounded-md cursor-pointer hover:bg-neutral-900 hover:text-neutral-200 hover:border-neutral-200 transition-all duration-400'>
-              LogOut
+            <button onClick={logoutHandler} className='flex items-center gap-[0.8vw] bg-white text-black text-[1.5vw] border-2 border-black font-semibold px-[1.3vw] py-[0.5vw] rounded-md cursor-pointer hover:bg-neutral-900 hover:text-neutral-200 hover:border-neutral-200 transition-all duration-400'>
+              <span>LogOut</span>
+              <FiLogOut size={24}/>
             </button>
             {/* delete account */}
             <div className='flex flex-col mt-[1.2vw]'>
               <p className='text-red-400'>Delete Account ?</p>
               <div className='flex flex-col items-start gap-[0.5vw] border-1 border-red-400 p-[0.7vw] rounded-md'>
                 <div className='flex items-center gap-[0.3vw] px-[0.3vw]'>
-                  <img src={assets.danger} alt="" className='w-[1.5vw] h-[1.5vw]' />
+                  <IoIosWarning size={18} color='#ef4444'/>
                   <p className='text-[1.2vw] text-red-400'>This action is permanent and can't be rolled back</p>
                 </div>
                 <button onClick={() => setDeleteConfirmation(true)} className='bg-red-600 text-neutral-200 text-[1.3vw] font-semibold p-[0.5vw] rounded-md cursor-pointer border-2 border-red-600 hover:border-black hover:text-black transition-all duration-500'>
@@ -172,24 +176,37 @@ const Profile = () => {
             changePwd
               ?
               <div className='relative flex flex-col items-center bg-neutral-700 md:p-[1vw] p-4 md:gap-[1vw] gap-3 rounded-md'>
-                <img onClick={() => setChangePwd(false)} src={assets.cross} alt="" className='invert opacity-60 absolute cursor-pointer md:w-[2vw] w-5 md:right-[1.2vw] right-3 p-[0.2vw] rounded-md' />
+                <div onClick={() => setChangePwd(false)} className='opacity-90 absolute cursor-pointer md:w-[2vw] w-5 md:right-[1.2vw] right-3 p-[0.2vw] rounded-md'>
+                  <RxCross2 color='white' className='w-full h-full'/>
+                </div>
+                {/* <RxCross2 size={24} color='white' className='opacity-90 absolute cursor-pointer md:right-['/> */}
                 <p>Change Password</p>
                 <div className='flex justify-center items-center gap-[1vw] bg-neutral-900 md:w-[22vw] border-2 border-neutral-900 rounded-md focus-within:border-neutral-500 transition-all duration-500 pr-[1.7vw]'>
                   <input type={oldPasswordVisible ? 'text' : 'password'} onChange={(e) => setOldPassword(e.target.value)} value={oldPassword} className='pl-[1.7vw] py-[0.7vw] md:text-[1.4vw] text-lg outline-none' placeholder='Enter Old Password' />
                   {
                     oldPasswordVisible ?
-                      <img onClick={() => setOldPasswordVisible(false)} src={assets.eyeVisible} alt="" className='md:w-[2.2vw] w-5 invert opacity-40 cursor-pointer' />
+                      <div onClick={() => setOldPasswordVisible(false)} className='md:w-[2.2vw] w-5 opacity-50 cursor-pointer'>
+                        <VscEye color='white' className='w-full h-full'/>
+                      </div>
                       :
-                      <img onClick={() => setOldPasswordVisible(true)} src={assets.eyeHidden} alt="" className='md:w-[2.2vw] w-5 invert opacity-40 cursor-pointer' />
+                      <div onClick={() => setOldPasswordVisible(true)} className='md:w-[2.2vw] w-5 opacity-50 cursor-pointer'>
+                        <VscEyeClosed color='white' className='w-full h-full'/>
+                      </div>
                   }
                 </div>
                 <div className='flex justify-center items-center gap-[1vw] bg-neutral-900 md:w-[22vw] border-2 border-neutral-900 rounded-md focus-within:border-neutral-500 transition-all duration-500 pr-[1.7vw]'>
                   <input type={newPasswordVisible ? 'text' : 'password'} onChange={(e) => setNewPassword(e.target.value)} value={newPassword} className='pl-[1.7vw] py-[0.7vw] md:text-[1.4vw] text-lg outline-none' placeholder='Enter New Password' />
                   {
                     newPasswordVisible ?
-                      <img onClick={() => setNewPasswordVisible(false)} src={assets.eyeVisible} alt="" className='md:w-[2.2vw] w-5 invert opacity-40 cursor-pointer' />
+                      
+                      <div onClick={() => setNewPasswordVisible(false)} src={assets.eyeVisible} alt="" className='md:w-[2.2vw] w-5 opacity-50 cursor-pointer'>
+                        <VscEye color='white' className='w-full h-full'/>
+                      </div>
                       :
-                      <img onClick={() => setNewPasswordVisible(true)} src={assets.eyeHidden} alt="" className='md:w-[2.2vw] w-5 invert opacity-40 cursor-pointer' />
+                      
+                      <div onClick={() => setNewPasswordVisible(true)} src={assets.eyeHidden} alt="" className='md:w-[2.2vw] w-5 opacity-50 cursor-pointer'>
+                        <VscEyeClosed color='white' className='w-full h-full'/>
+                      </div>
                   }
                 </div>
                 <button onClick={() => passwordChange()} className='bg-yellow-600 md:px-[1vw] px-2 py-[0.5vw] md:text-[1.5vw] text-lg rounded-md font-medium cursor-pointer hover:bg-yellow-500 transition-all duration-300'>
@@ -208,9 +225,10 @@ const Profile = () => {
         {/* logout and delete account for smaller screens*/}
         <div className='flex flex-col md:hidden items-start md:gap-[1.2vw] gap-2 mt-[4vw] mx-10'>
           {/* logout button */}
-          <button onClick={logoutHandler} className='bg-white text-black md:text-[1.5vw] text-xl border-2 border-black font-semibold px-[1.3vw] py-[0.5vw] rounded-md cursor-pointer hover:bg-neutral-900 hover:text-neutral-200 hover:border-neutral-200 transition-all duration-400'>
-            LogOut
-          </button>
+            <button onClick={logoutHandler} className='flex items-center md:gap-[0.8vw] gap-1 bg-white text-black md:text-[1.5vw] border-2 border-black font-semibold px-[1.3vw] md:py-[0.5vw] py-1 rounded-md cursor-pointer hover:bg-neutral-900 hover:text-neutral-200 hover:border-neutral-200 transition-all duration-400'>
+              <span>LogOut</span>
+              <FiLogOut size={24}/>
+            </button>
           {/* delete account */}
           <div className='flex flex-col'>
             <p className='text-red-400'>Delete Account ?</p>

@@ -4,12 +4,12 @@ import { AppContext } from '../context/AppContext';
 import { toast } from 'react-toastify';
 import OtpInput from '../components/OtpInput';
 import { useNavigate } from 'react-router-dom';
-import { assets } from '../assets/assets';
+import { VscEye, VscEyeClosed } from "react-icons/vsc";
 
 const Login = () => {
 
   const { backendUrl, setUser } = useContext(AppContext);
-  const [signedUp, setSignedUp] = useState(false);
+  const [signedUp, setSignedUp] = useState(true);
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -133,9 +133,13 @@ const Login = () => {
           <input type={passwordVisible ? 'text' : 'password' } onChange={(e) => setPassword(e.target.value)} value={password} className='text-neutral-300 md:w-[17.9vw] max-w-[57vw] pl-5 md:py-[1.2vw] py-4 md:text-[1.5vw] text-lg outline-none' placeholder='Enter password' />
           {
             passwordVisible ? 
-            <img onClick={()=>setPasswordVisible(false)} src={assets.eyeVisible} alt="" className='md:w-[2vw] w-8 invert opacity-40 cursor-pointer'/>
+            <div onClick={()=>setPasswordVisible(false)}>
+              <VscEye size={32} color='white' className='opacity-50 cursor-pointer'/>
+            </div>
             :
-            <img onClick={()=>setPasswordVisible(true)} src={assets.eyeHidden} alt="" className='md:w-[2vw] w-8 invert opacity-40 cursor-pointer'/>
+            <div onClick={()=>setPasswordVisible(true)}>
+              <VscEyeClosed size={32} color='white' className='opacity-50 cursor-pointer'/>
+            </div>
           }
           </div>
           {signedUp

@@ -13,7 +13,8 @@ const PORT = process.env.PORT || 4000
 const app = express();
 
 app.use(cors({
-    origin: "http://localhost:5173",
+    // origin: "http://localhost:5173",
+    origin: "https://dqgplh10-5173.inc1.devtunnels.ms",
     credentials: true
 }));
 app.use(cookieParser());

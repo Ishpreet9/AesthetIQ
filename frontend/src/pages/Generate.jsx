@@ -6,6 +6,12 @@ import Loader from '../components/Loader';
 import ImageBox from '../components/ImageBox';
 import { toast } from 'react-toastify';
 import { Link } from 'react-router-dom';
+import { GiPerspectiveDiceSixFacesRandom } from "react-icons/gi";
+import { FaFeatherAlt } from "react-icons/fa";
+import { GiHamburgerMenu } from "react-icons/gi";
+import { RxCross2 } from "react-icons/rx";
+
+
 
 const Generate = () => {
 
@@ -135,8 +141,10 @@ const Generate = () => {
           }
         </div>
         {/* all generations button */}
-        <Link to={'/all-generations'} className='flex items-center gap-4 bg-neutral-700 text-neutral-300 md:text-[1.1vw] md:px-[2vw] px-3 py-[1.2vh] cursor-pointer border-2 border-transparent hover:border-neutral-300 transition-all duration-500'>
-          <img src={assets.menu} alt="" className='md:w-[1.8vw] w-6 invert opacity-70'/>
+        <Link to={'/all-generations'} className='flex items-center gap-4 bg-neutral-700 text-neutral-300 md:text-[1.1vw] md:px-[1.9vw] px-3 py-[1.2vh] cursor-pointer border-2 border-transparent hover:border-neutral-300 transition-all duration-500'>
+          <div className='md:w-[2vw] w-6'>
+            <GiHamburgerMenu className='opacity-90 w-full h-full'/>
+          </div>
           <span>
           VIEW ALL GENERATIONS
           </span>
@@ -145,11 +153,11 @@ const Generate = () => {
           <div className='relative'>
             {/* enhance prompt and random prompt button */}
           <div className='absolute flex flex-row md:gap-[1vw] gap-2 md:bottom-[14.4vw] bottom-4 md:left-0 left-57 z-10'>
-          <button onClick={()=>enhancePrompt()} type='button' className='group flex items-center justify-center gap-[1vw] md:pl-[0.8vw] md:px-0 pr-2 pl-3 md:py-[0.8vw] py-2 md:bg-neutral-900 bg-neutral-900 border-3 border-black rounded-md cursor-pointer hover:border-neutral-400'>
+          <button onClick={()=>enhancePrompt()} type='button' className='group flex items-center justify-center gap-[1vw] md:pl-[0.8vw] md:px-0 pr-2 pl-3 md:py-[0.8vw] py-2 md:bg-neutral-900 bg-neutral-900/50 border-3 border-black rounded-md cursor-pointer hover:border-neutral-400'>
             {promptEnhanceLoading ? 
             <div className='md:w-[2vw] w-7 h-7 md:h-[2vw] md:border-3 border-4 border-neutral-400 rounded-full border-t-blue-400 animate-spin'></div>
             :
-            <img src={assets.feather} alt="" className='invert md:w-[2vw] w-7 opacity-80' />
+            <FaFeatherAlt size={28} color='white' className='opacity-70 m-[0.23vw]'/>
              }
             <p className='whitespace-nowrap text-neutral-200 max-w-0 overflow-hidden group-hover:max-w-[10vw] group-hover:mr-[0.8vw] transition-all duration-500'>Enhance Prompt</p>
           </button>
@@ -157,7 +165,7 @@ const Generate = () => {
             {randomPromptLoading ? 
             <div className='md:w-[2vw] md:h-[2vw] w-7 h-7 md:border-3 border-4 border-neutral-400 rounded-full border-t-blue-400 animate-spin'></div>
             :
-            <img src={assets.dice} alt="" className='invert md:w-[2vw] w-7 opacity-80' />
+            <GiPerspectiveDiceSixFacesRandom size={32} color='white' className='opacity-70'/>
             }
             <p className='whitespace-nowrap text-neutral-200 max-w-0 overflow-hidden group-hover:max-w-[10vw] group-hover:mr-[0.8vw] transition-all duration-500'>Random Prompt</p>
           </button>
@@ -182,8 +190,9 @@ const Generate = () => {
                 {
                   e.stopPropagation();
                   setStyle('');
-                }} className='absolute md:bottom-[2.5vh] bottom-3 left-32 md:left-[11vw] md:p-[0.3vw] p-[1.3vw] bg-neutral-300/30 rounded border-2 border-black group/cross hover:bg-neutral-600/30 hover:invert'>
-                  <img src={assets.cross} alt="" className='md:w-[1.3vw] w-5' />
+                }} className='absolute md:bottom-[2.7vh] bottom-3 left-32 md:left-[8.8vw] md:p-[0.3vw] p-[1.3vw] bg-neutral-300/30 rounded border-2 border-black group/cross hover:bg-neutral-600/30 hover:invert'>
+                  {/* <img src={assets.cross} alt="" className='md:w-[1.3vw] w-5' /> */}
+                  <RxCross2 size={16} color='black'/>
                 </div>
                 }
               </button>
